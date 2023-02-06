@@ -34,7 +34,7 @@ WORKDIR /app
 
 #-------------------TODO-------------------
 # Copy the rest of the Django project to the working directory
-#COPY . .
+#COPY ./backend/backend .
 
 #-------------------TODO-------------------
 # Set the command to run when the container starts
