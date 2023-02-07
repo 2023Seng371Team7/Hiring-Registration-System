@@ -7,7 +7,7 @@ on:
 env:
   PROJECT_ID: csc371-376900
   GAR_LOCATION: us-west1
-  SERVICE: Hiring-Registration-System
+  SERVICE: hiring-registration-system
   REGION: us-west1
 
 jobs:
