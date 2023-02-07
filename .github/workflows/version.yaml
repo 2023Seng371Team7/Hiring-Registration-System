@@ -1,4 +1,4 @@
-name: Bump a new Version
+name: Bump a new software version
 
 on:
   push:
