@@ -26,7 +26,7 @@ SECRET_KEY = "django-insecure-su72d5!2m1rm_87d_r+s)*ao5f$g%r5-*c6otg(#w9zqx2^x16
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["hiring-registration-system-tbomrea3iq-uw.a.run.app"]
 
 
 # Application definition
