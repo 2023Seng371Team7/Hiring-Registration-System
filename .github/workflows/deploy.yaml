@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       # - name: Google Auth
       #   id: auth
@@ -36,7 +36,20 @@ jobs:
         uses: 'google-github-actions/auth@v0'
         with:
           credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
+          token_format: access_token
 
+      # - name: 'Set up Cloud SDK'
+        # uses: 'google-github-actions/setup-gcloud@v1'
+        # with:
+        # version: '>= 363.0.0'
+
+        # - gcloud config set project csc371-376900
+        # - gcloud auth activate-service-account --key-file '${{ secrets.GCP_CREDENTIALS }}'
+        # - gcloud builds submit --tag gcr.io/csc371-376900/
+
+
+
+      # BEGIN - Docker auth and build (NOTE: If you already have a container image, these Docker steps can be omitted)
 
       # Authenticate Docker to Google Cloud Artifact Registry
       - name: Docker Auth
