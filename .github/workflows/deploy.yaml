@@ -2,7 +2,8 @@ name: Build and Deploy to Cloud Run
 
 on:
   push:
-    branches: [ "main", "cicd" ]
+    tags:
+      - 'v*'
 
 env:
   PROJECT_ID: csc371-376900
@@ -21,16 +22,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-
-      # Auto increment version
-      - run: git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
-      - run: git config user.name "$GITHUB_ACTOR"
-      - run: cd frontend && npm version patch -m "v%s"
-      - run: VERSION=$(node -p "require('./frontend/package.json').version")
-      - run: git tag ${VERSION}
-      - run: git push "https://$GITHUB_ACTOR:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY.git" --follow-tags
-      - run: git push "https://$GITHUB_ACTOR:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY.git" --tags
-
 
       - name: Google Auth
         id: auth
