@@ -2,7 +2,7 @@ name: Build and Deploy to Cloud Run
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main", "cicd" ]
 
 env:
   PROJECT_ID: csc371-376900
