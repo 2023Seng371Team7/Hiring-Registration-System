@@ -39,8 +39,5 @@ COPY --from=builder /app/frontend/dist/index.html /app/backend/frontend/template
 COPY --from=builder /app/frontend/dist/assets/* /app/backend/static/assets/
 COPY --from=builder /app/frontend/dist/* /app/backend/static/
 
-RUN ls -al /app/backend/static
-RUN ls -al /app/backend/static/*
-
 EXPOSE 80
 CMD [ "python", "/app/backend/manage.py", "runserver", "0.0.0.0:80" ]

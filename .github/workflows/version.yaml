@@ -2,7 +2,7 @@ name: Bump a new software version
 
 on:
   push:
-    branches: [ "main", "cicd" ]
+    branches: [ "main" ]
 
 jobs:
   version:
@@ -23,4 +23,4 @@ jobs:
           tag-prefix:  'v'
           PACKAGEJSON_DIR:  'frontend'
           bump-policy: 'ignore'
-          target-branch: 'cicd'
+          target-branch: 'main'
