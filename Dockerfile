@@ -42,7 +42,11 @@ COPY backend /app/backend
 
 # #Copy static files from the frontend build stage
 COPY --from=builder /app/frontend/dist/* /app/backend/static/
+COPY --from=builder /app/frontend/dist/assets /app/backend/static/
 COPY --from=builder /app/frontend/dist/index.html /app/backend/frontend/templates/frontend/index.html
+
+RUN ls -al /app/backend/static
+RUN ls -al /app/backend/static/*
 
 EXPOSE 80
 CMD [ "python", "/app/backend/manage.py", "runserver", "0.0.0.0:80" ]
