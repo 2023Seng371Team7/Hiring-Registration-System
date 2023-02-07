@@ -34,16 +34,10 @@ RUN pip install --no-cache-dir -r /app/backend/requirements.txt
 
 COPY backend /app/backend
 
-# RUN pwd
-# RUN ls -al
-# RUN ls -al /app
-# RUN ls -al /app/backend
-# RUN ls -al /app/backend/*
-
 # #Copy static files from the frontend build stage
 COPY --from=builder /app/frontend/dist/index.html /app/backend/frontend/templates/frontend/index.html
+COPY --from=builder /app/frontend/dist/assets/* /app/backend/static/assets/
 COPY --from=builder /app/frontend/dist/* /app/backend/static/
-COPY --from=builder /app/frontend/dist/assets /app/backend/static/
 
 RUN ls -al /app/backend/static
 RUN ls -al /app/backend/static/*
