@@ -23,3 +23,4 @@ jobs:
           tag-prefix:  'v'
           PACKAGEJSON_DIR:  'frontend'
           bump-policy: 'ignore'
+          target-branch: 'cicd'
