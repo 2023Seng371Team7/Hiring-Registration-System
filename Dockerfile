@@ -10,32 +10,39 @@ RUN npm install -g pnpm
 # Copy the files to the './frontend' directory
 COPY ./frontend /app/frontend
 
-# Run pnpm install with all the optimization flags for production
-RUN pnpm install --prefer-frozen-lockfile --production
+#Install npm deps
+RUN pnpm install --prefer-frozen-lockfile
 
 # Run the pnpm build command
 RUN pnpm run build
 
-# Use the production environment
-FROM python:3.9-alpine as prod
+# Separate env for building python/django
+FROM python:3.9-alpine as django
 
 # Set the working directory to /app
-WORKDIR /app
+WORKDIR /app/backend/
 
-#-------------------TODO-------------------
-#TODO: Build django app
-#RUN pip install --upgrade pip
-#COPY requirements.txt .
-#RUN pip install -r requirements.txt
+#Install system requirements
+RUN apk add build-base 
+RUN apk add krb5-dev
+RUN apk add snappy-dev
 
-#-------------------TODO-------------------
-#TODO: Copy the built files into a static directory for django
-#COPY --from=builder /app/frontend/dist /app
+#Install python requirements
+RUN pip install --upgrade pip
+COPY backend/requirements.txt /app/backend/requirements.txt
+RUN pip install --no-cache-dir -r /app/backend/requirements.txt
 
-#-------------------TODO-------------------
-# Copy the rest of the Django project to the working directory
-#COPY ./backend/backend .
+COPY backend /app/backend
 
-#-------------------TODO-------------------
-# Set the command to run when the container starts
-CMD [ "python", "manage.py", "runserver", "0.0.0.0:8000" ]
+# RUN pwd
+# RUN ls -al
+# RUN ls -al /app
+# RUN ls -al /app/backend
+# RUN ls -al /app/backend/*
+
+# #Copy static files from the frontend build stage
+COPY --from=builder /app/frontend/dist/* /app/backend/static/
+COPY --from=builder /app/frontend/dist/index.html /app/backend/frontend/templates/frontend/index.html
+
+EXPOSE 80
+CMD [ "python", "/app/backend/manage.py", "runserver", "0.0.0.0:80" ]
