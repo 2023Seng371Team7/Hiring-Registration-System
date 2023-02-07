@@ -41,9 +41,9 @@ COPY backend /app/backend
 # RUN ls -al /app/backend/*
 
 # #Copy static files from the frontend build stage
+COPY --from=builder /app/frontend/dist/index.html /app/backend/frontend/templates/frontend/index.html
 COPY --from=builder /app/frontend/dist/* /app/backend/static/
 COPY --from=builder /app/frontend/dist/assets /app/backend/static/
-COPY --from=builder /app/frontend/dist/index.html /app/backend/frontend/templates/frontend/index.html
 
 RUN ls -al /app/backend/static
 RUN ls -al /app/backend/static/*
