@@ -28,10 +28,12 @@ const App = () => {
                     type="text"
                     sx={{
                         "width": "55%",
-                        "flex-basis": "8%",
-                        "margin-top": "7px",
-                        "margin-left": "4px",
-                        "border-radius": "50px",
+                        "flexBasis": "8%",
+                        "marginTop": "7px",
+                        "marginLeft": "4px",
+                        "& .MuiInputBase-root": {
+                            "borderRadius": "50px"
+                        }
                     }}
                 />
                 <TextField
@@ -41,19 +43,21 @@ const App = () => {
                     placeholder="Password"
                     sx={{
                         'width': '55%',
-                        'flex-basis': '100%',
-                        'margin-top': '7px',
-                        'border-radius': '50px',
+                        'flexBasis': '100%',
+                        'marginTop': '7px',
+                        "& .MuiInputBase-root": {
+                            "borderRadius": "50px"
+                        }
                     }}
                 />
                 <span className="forgot-password">Forgot Password?</span>
                 <Button className="button" id="sigin-button" sx={{
                     width: '25%',
-                    'flex-basis': '8%',
-                    'margin-top': '1px',
-                    'margin-left': '12px',
-                    'border-radius': '50px',
-                    'background-color': '#397598',
+                    'flexBasis': '8%',
+                    'marginTop': '1px',
+                    'marginLeft': '12px',
+                    'borderRadius': '50px',
+                    'backgroundColor': '#397598',
                     'color': '#d7ecf5',
                 }} {...propsData.button}
                 />
