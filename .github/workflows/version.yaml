@@ -1,4 +1,4 @@
-name: Bump a new software version
+name: Bump a new software version ⚡
 
 on:
   push:
@@ -15,7 +15,7 @@ jobs:
         uses: actions/checkout@v2
 
       # Auto increment version
-      - name:  'Automated Version Bump'
+      - name:  'Automated Version Bump 🤖'
         uses:  'phips28/gh-action-bump-version@master'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
