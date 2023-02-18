@@ -34,8 +34,5 @@ jobs:
         key: ${{ runner.os }}-python-${{ hashFiles('backend/requirements.txt') }}
         restore-keys: |
           ${{ runner.os }}-python-
-    - name: Set environment variable
-      env:
-        SECRET_KEY: ${{ secrets.SECRET_KEY }}
     - name: Run tests
-      run: python3 backend/manage.py test
+      run: SECRET_KEY="${{ secrets.SECRET_KEY }}" python3 backend/manage.py test
