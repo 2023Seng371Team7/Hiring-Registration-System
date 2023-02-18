@@ -10,20 +10,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    # - name: Cache linux networking dependencies 💾
-    #   uses: actions/cache@v2
-    #   id: cache-linux
-    #   with:
-    #     path: ~/.cache/apt
-    #     key: ${{ runner.os }}-apt-${{ hashFiles('apt-packages.txt') }}
-    #     restore-keys: |
-    #       ${{ runner.os }}-apt-
-    # - name: Install linux networking dependencies 💾
-    #   if: steps.cache-linux.outputs.cache-hit != 'true'
-    #   run: |
-    #     sudo apt-get update
-    #     sudo apt-get install -y libkrb5-dev libsasl2-modules-gssapi-mit python3-gssapi
-    - uses: awalsh128/cache-apt-pkgs-action@latest
       with:
         packages: libkrb5-dev libsasl2-modules-gssapi-mit python3-gssapi
         version: 2.0
@@ -48,4 +34,4 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
     - name: Run tests 🧪
-      run: . ./.venv/bin/activate && SECRET_KEY="${{ secrets.SECRET_KEY }}" python3 backend/manage.py test
+      run: cd backend && . ./.venv/bin/activate && SECRET_KEY="${{ secrets.SECRET_KEY }}" python3 manage.py test
