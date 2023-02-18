@@ -89,7 +89,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           filename: .github/AUTOMATIC_ISSUE_TEMPLATE.md
-          ADJECTIVE: ${{ join(steps.test.outputs.*, '\n') }}
+          OUTPUT: ${{ join(steps.test.outputs.*, '\n') }}
 
       - name: Force Failure 👎
         if: steps.test.outputs.exit_code == 1
