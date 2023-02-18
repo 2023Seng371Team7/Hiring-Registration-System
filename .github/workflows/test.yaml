@@ -10,6 +10,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+    - name: Cache linux networking dependencies 🖧
+      uses: actions/cache@v2
+      with:
+        path: ~/.cache/apt
+        key: ${{ runner.os }}-apt-${{ hashFiles('apt-packages.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-apt-
+    - name: Install linux networking dependencies 🖧
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y libkrb5-dev libsasl2-modules-gssapi-mit python3-gssapi
     - name: Cache Python packages 📦
       uses: actions/cache@v2
       with:
