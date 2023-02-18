@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Cache linux networking dependencies 🖧
+    - name: Cache linux networking dependencies 💾
       uses: actions/cache@v2
       id: cache-linux
       with:
@@ -18,7 +18,7 @@ jobs:
         key: ${{ runner.os }}-apt-${{ hashFiles('apt-packages.txt') }}
         restore-keys: |
           ${{ runner.os }}-apt-
-    - name: Install linux networking dependencies 🖧
+    - name: Install linux networking dependencies 💾
       if: steps.cache-linux.outputs.cache-hit != 'true'
       run: |
         sudo apt-get update
@@ -41,13 +41,5 @@ jobs:
         cd backend/
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-    # - name: Cache Python install 💾
-    #   id: cache-python
-    #   uses: actions/cache@v2
-    #   with:
-    #     path: ~/.cache/pip
-    #     key: ${{ runner.os }}-python-${{ hashFiles('backend/requirements.txt') }}
-    #     restore-keys: |
-    #       ${{ runner.os }}-python-
     - name: Run tests 🧪
       run: SECRET_KEY="${{ secrets.SECRET_KEY }}" python3 backend/manage.py test
