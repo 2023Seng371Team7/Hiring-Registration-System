@@ -1,4 +1,4 @@
-name: Run Tests
+name: Run Tests 🧪
 
 on:
   pull_request:
@@ -10,23 +10,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Cache Python packages
+    - name: Cache Python packages 📦
       uses: actions/cache@v2
       with:
         path: ~/.cache/pip
         key: ${{ runner.os }}-pip-${{ hashFiles('backend/requirements.txt') }}
         restore-keys: |
           ${{ runner.os }}-pip-
-    - name: Set up Python
+    - name: Set up Python 🐍
       uses: actions/setup-python@v2
       with:
         python-version: '3.x'
-    - name: Install dependencies
+    - name: Install dependencies 📥
       run: |
         cd backend/
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-    - name: Cache Python install
+    - name: Cache Python install 💾
       id: cache-python-install
       uses: actions/cache@v2
       with:
@@ -34,5 +34,5 @@ jobs:
         key: ${{ runner.os }}-python-${{ hashFiles('backend/requirements.txt') }}
         restore-keys: |
           ${{ runner.os }}-python-
-    - name: Run tests
+    - name: Run tests 🧪
       run: SECRET_KEY="${{ secrets.SECRET_KEY }}" python3 backend/manage.py test
