@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 const DEV_URL = 'http://localhost:8000';
-const PROD_URL = 'https://hiring-registration-system-tbomrea3iq-uw.a.run.app'; //TODO: Change to prod
-const STAGE_URL = 'https://hiring-registration-system-tbomrea3iq-uw.a.run.app'; //TODO: Change to stage
+const PROD_URL = 'https://hiring-registration-system-prod-tbomrea3iq-uw.a.run.app';
+const STAGE_URL = 'https://hiring-registration-system-stage-tbomrea3iq-uw.a.run.app/';
 
 const getCurrentUrl = () => window.location.href;
 
