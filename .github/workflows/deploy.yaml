@@ -80,7 +80,7 @@ jobs:
       - name: Run integration tests 🧪
         id: test
         run: |-
-          ./health.sh "${{ steps.staging-deploy.outputs.url }}" >> $GITHUB_OUTPUT
+          ./integration_tests/health.sh "${{ steps.staging-deploy.outputs.url }}" >> $GITHUB_OUTPUT
           echo ::set-output name=exit_code::$?
 
       - uses: JasonEtco/create-an-issue@v2
