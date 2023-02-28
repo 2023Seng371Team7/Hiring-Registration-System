@@ -7,3 +7,4 @@ pymongo==4.3.3
 python-dotenv==0.21.1
 python-snappy==0.6.1
 sqlparse==0.4.3
+djangorestframework==3.14.0

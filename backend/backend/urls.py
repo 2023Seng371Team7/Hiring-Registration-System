@@ -22,4 +22,5 @@ urlpatterns = [
     path("page2", include("frontend.urls")),
     path("page3", include("frontend.urls")),
     path("", include("frontend.urls")),
+    path("api/", include("apis.urls"))
 ]

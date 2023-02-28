@@ -11,3 +11,7 @@ def get_db_handle(db_name):
     return db_handle, client
 
 
+def generate_salt():
+    return str(os.urandom(32))
+
+
