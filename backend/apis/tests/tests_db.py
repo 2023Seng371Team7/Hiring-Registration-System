@@ -4,6 +4,9 @@ from utils import get_db_handle
 
 
 # Create your tests here.
+"""
+TEST FOR get_db_handle() in utils.py
+"""
 class MongoTests(unittest.TestCase):
     def test_WriteToTestDatabase(self) -> None:
         db, _ = get_db_handle("HRStest")
