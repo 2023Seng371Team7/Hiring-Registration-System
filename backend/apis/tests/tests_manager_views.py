@@ -5,7 +5,6 @@ from unittest.mock import Mock, patch
 
 
 # Create your tests here.
-
 class ManagerViewsTestCase(unittest.TestCase):
     def setUp(self):
         self.client = Client()
