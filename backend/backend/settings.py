@@ -30,7 +30,7 @@ SECRET_KEY = os.environ['SECRET_KEY']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["hiring-registration-system-tbomrea3iq-uw.a.run.app"]
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
