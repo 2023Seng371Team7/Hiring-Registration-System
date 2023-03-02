@@ -13,7 +13,7 @@ const App = () => {
     const logIn = async (email, password) => {
         try {
             let result = await axios.get(
-                "http://localhost:8080/api/user_authenticate?username=" + email + "&password=" + password
+                "http://localhost:8080/api/login?username=" + email + "&password=" + password
             );
 
             if (result.status === 500)
