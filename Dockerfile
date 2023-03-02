@@ -42,6 +42,8 @@ COPY --from=builder /app/frontend/dist/* /app/backend/static/
 ARG SECRET_KEY
 ENV SECRET_KEY=$SECRET_KEY
 
+ARG AI_KEY
+ENV AI_KEY=$AI_KEY
 
 EXPOSE 80
 CMD [ "python", "/app/backend/manage.py", "runserver", "0.0.0.0:80" ]
