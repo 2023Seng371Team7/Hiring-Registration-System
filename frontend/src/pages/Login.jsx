@@ -7,26 +7,17 @@ const App = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const onSubmit = async (e) => {
-        // e.preventDefault()
         console.log(email + " " + password)
+        let result = await logIn(email, password)
     }
     const logIn = async (email, password) => {
-        let userData = null;
         try {
             let result = await axios.get(
                 "http://localhost:8080/api/user_authenticate?username=" + email + "&password=" + password
             );
 
-            if (result.data === "")
+            if (result.status === 500)
                 alert("Incorrect password")
-            if (result.data !== "")
-                userData = result.data;
-            setUser({
-                firstName: userData.firstName,
-                lastName: userData.lastName,
-                email: userData.email,
-                groupIds: userData.groupIds,
-            })
         } catch (err) {
             console.error(err);
         }
