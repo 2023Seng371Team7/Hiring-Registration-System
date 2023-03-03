@@ -19,7 +19,7 @@ jobs:
       contents: 'read'
       id-token: 'write'
       issues: 'write'
-      
+
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -92,7 +92,7 @@ jobs:
           title: "Deployment to Staging Failed!"
           body: |
             The staging deployment failed:
-            {{ join(steps.test.outputs.*, '\n') }}
+            ${{ join(steps.test.outputs.*, '\n') }}
           labels: |
             bug
 
