@@ -11,14 +11,14 @@ fi
 # Test base URL
 curl -sSf "$BASE_URL" > /dev/null
 if [ $? -ne 0 ]; then
-  echo "Error: $BASE_URL returned a non-2xx response"
+  echo "HEALTH_BASE='Error: $BASE_URL returned a non-2xx response'"
   exit 1
 fi
 
 # Test login URL
 curl -sSf "${BASE_URL}admin/login/" > /dev/null
 if [ $? -ne 0 ]; then
-  echo "Error: ${BASE_URL}admin/login/ returned a non-2xx response"
+  echo "HEALTH_ADMIN='Error: ${BASE_URL}admin/login/ returned a non-2xx response'"
   exit 1
 fi
 

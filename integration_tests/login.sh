@@ -12,7 +12,7 @@ fi
 # Test login URL
 curl -sSf "${BASE_URL}api/login?user=$LOGIN_USERNAME&password=$LOGIN_PASSWORD" > /dev/null
 if [ $? -ne 0 ]; then
-  echo "Error: ${BASE_URL}api/login/ returned a non-2xx response"
+  echo "API_LOGIN='Error: ${BASE_URL}api/login/ returned a non-2xx response'"
   exit 1
 fi
 
