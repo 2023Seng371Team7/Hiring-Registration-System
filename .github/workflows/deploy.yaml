@@ -80,14 +80,9 @@ jobs:
       - name: Run integration tests 🧪
         id: test
         run: |-
-          delimiter="$(openssl rand -hex 8)" 
-          echo "output-name<<${delimiter}" >> "${GITHUB_OUTPUT}" 
           ./integration_tests/health.sh "${{ steps.staging-deploy.outputs.url }}" >> "${GITHUB_OUTPUT}" && CODE="$?" || CODE="$?" 
-          [[ "$CODE" -eq 0 ]] && echo "${delimiter}" >> "${GITHUB_OUTPUT}"
           [[ "$CODE" -eq 0 ]] && ./integration_tests/login.sh "${{ steps.staging-deploy.outputs.url }}" "admin" "${{ secrets.LOGIN_PASSWORD }}" >> "${GITHUB_OUTPUT}" && CODE="$?" || CODE="$?" 
-          echo "${delimiter}" >> "${GITHUB_OUTPUT}" 
           echo "exit_code=$CODE" >> "${GITHUB_OUTPUT}" 
-          echo "${delimiter}" >> "${GITHUB_OUTPUT}" 
 
       - uses: JasonEtco/create-an-issue@v2
         if: steps.test.outputs.exit_code != 0
