@@ -82,7 +82,7 @@ jobs:
         run: |-
           ./integration_tests/health.sh "${{ steps.staging-deploy.outputs.url }}" >> $GITHUB_OUTPUT && CODE="$?" || CODE="$?"
           [[ "$CODE" -eq 0 ]] && ./integration_tests/login.sh "${{ steps.staging-deploy.outputs.url }}" "admin" "${{ secrets.LOGIN_PASSWORD }}" >> $GITHUB_OUTPUT && CODE="$?" || CODE="$?"
-          echo ::set-output name=exit_code::$CODE
+          echo "exit_code=$CODE" >> $GITHUB_OUTPUT
 
       - uses: JasonEtco/create-an-issue@v2
         if: steps.test.outputs.exit_code != 0
