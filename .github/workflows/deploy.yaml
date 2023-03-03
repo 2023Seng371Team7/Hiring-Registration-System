@@ -84,13 +84,16 @@ jobs:
           [[ "$CODE" -eq 0 ]] && ./integration_tests/login.sh "${{ steps.staging-deploy.outputs.url }}" "admin" "${{ secrets.LOGIN_PASSWORD }}" >> "${GITHUB_OUTPUT}" && CODE="$?" || CODE="$?" 
           echo "exit_code=$CODE" >> "${GITHUB_OUTPUT}" 
 
-      - uses: JasonEtco/create-an-issue@v2
+      - uses: actions-ecosystem/action-create-issue@v1
         if: steps.test.outputs.exit_code != 0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          filename: .github/AUTOMATIC_ISSUE_TEMPLATE.md
-          OUTPUT: ${{ join(steps.test.outputs.*, '\n') }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          title: "Deployment to Staging Failed!"
+          body: |
+            The staging deployment failed:
+            {{ join(steps.test.outputs.*, '\n') }}
+          labels: |
+            bug
 
       - name: Force Failure 👎
         if: steps.test.outputs.exit_code != 0
