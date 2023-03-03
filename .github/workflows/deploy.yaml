@@ -85,7 +85,7 @@ jobs:
           echo ::set-output name=exit_code::$CODE
 
       - uses: JasonEtco/create-an-issue@v2
-        if: steps.test.outputs.exit_code == 1
+        if: steps.test.outputs.exit_code != 0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -93,7 +93,7 @@ jobs:
           OUTPUT: ${{ join(steps.test.outputs.*, '\n') }}
 
       - name: Force Failure 👎
-        if: steps.test.outputs.exit_code == 1
+        if: steps.test.outputs.exit_code != 0
         run: exit 1
 
       - name: PROD - Deploy to Cloud Run 🚀
