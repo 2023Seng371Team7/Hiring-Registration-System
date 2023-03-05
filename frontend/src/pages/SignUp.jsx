@@ -19,7 +19,7 @@ const App = () => {
     return (
         <div className="sign-in">
             <div className="rectangle-3">
-                <span className="sign-in-1">Sign in</span>
+                <span className="sign-in-1">Sign up</span>
                 <TextField
                     className="group-15-instance"
                     {...propsData.group15}
@@ -60,10 +60,10 @@ const App = () => {
                         bgcolor: "#578DAD",
                         color: "#d7ecf5"
                       }
-                }}>Sign In</Button>
+                }}>Create</Button>
             </div>
             <span className="dont-have-an-account">
-                Don’t have an account? <Link to="/SignUp" style={{ 'color': '#FE9F70', 'textDecoration': 'None'}}>Join Now</Link>
+                Already have an account? <Link to="/" style={{ 'color': '#FE9F70', 'textDecoration': 'None'}}>Sign in</Link>
             </span>
         </div >
     );
