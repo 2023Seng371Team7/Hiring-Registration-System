@@ -46,7 +46,7 @@ ARG AI_KEY
 ENV AI_KEY=$AI_KEY
 
 ARG MongoConnectionString
-ENV MongoConnectionString=$MongoConnectionString
+ENV MongoConnectionString=$MONGOCONNECTIONSTRING
 
 EXPOSE 80
 CMD [ "python", "/app/backend/manage.py", "runserver", "0.0.0.0:80" ]
