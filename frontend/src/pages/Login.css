@@ -87,12 +87,6 @@
     line-height: 29px;
 }
 
-.button-instance {
-    width: 25%;
-    margin-top: 5px;
-    margin-left: 12px;
-}
-
 .button{
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.2);
 

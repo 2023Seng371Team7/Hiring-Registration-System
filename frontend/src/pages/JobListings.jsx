@@ -11,7 +11,7 @@ const App = () => {
             label: "Job Title, Company",
         },
         button: {
-            disableElevation: true,
+            disableElevation: false,
             variant: "contained",
             children: "Find Jobs",
         },
@@ -24,9 +24,8 @@ const App = () => {
         jobDetails: {
             jobDescription: "Job Description",
             button: {
-                disableElevation: true,
+                disableElevation: false,
                 variant: "contained",
-                color: "secondary",
                 children: "Apply",
             },
             num35AnHour: "$35 an hour",
@@ -57,31 +56,38 @@ const App = () => {
             </div>
             <div className="flex-container-2">
                 <TextField className="location" placeholder="Job Title, Company" sx={{
-                    'width': '35%',
-                    'flexBasis': '35%',
+                    'width': '30%',
+                    'flexBasis': '30%',
                     'marginTop': '5px',
                     "& .MuiInputBase-root": {
-                        "borderRadius": "50px"
+                        "borderRadius": "50px",
                     }
                 }} />
                 <TextField className="location" placeholder="Location" sx={{
-                    'width': '35%',
-                    'flexBasis': '35%',
+                    'width': '30%',
+                    'flexBasis': '30%',
                     'marginTop': '5px',
                     "& .MuiInputBase-root": {
                         "borderRadius": "50px"
                     }
                 }} />
-                <Button className="button-instance" {...propsData.button} sx={{
-                    'flexBasis': '10%',
-
-                    'borderRadius': '50px',
+                <Button className="button-instance" size="medium" {...propsData.button} sx={{
+                   'borderRadius': '50px',
                     'backgroundColor': '#397598',
                     'color': '#d7ecf5',
+                    'borderColor': '#397598',
+                    'marginTop': '0.5rem',
+                    'alignSelf':'start',
+                    ":hover": {
+                        bgcolor: "#578DAD",
+                        color: "#d7ecf5"
+                      }
                 }} />
             </div>
             <div className="flex-container-3">
-                <div className="flex-container-4">
+                <div className="flex-container-5">
+                    <Job className="post-1-instance-1" {...propsData.post1} />
+                    <Job className="post-1-instance-1" {...propsData.post1} />
                     <Job className="post-1-instance-1" {...propsData.post1} />
                 </div>
                 <div className="flex-container-4">

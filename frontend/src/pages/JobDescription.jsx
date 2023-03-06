@@ -12,18 +12,21 @@ const App = () => {
     return (
         <div className="job-details">
             <div className="rectangle-5">
-                <div className="flex-container">
                     <span className="software-testing-eng">
                         Software Testing Engineer
                     </span>
-                    <Button className="button-instance" {...propsData.button} sx={{
-                        'flexBasis': '10%',
-
+                    <Button size="medium" {...propsData.button} sx={{
                         'borderRadius': '50px',
+                        'alignSelf' : 'flex-start',
                         'backgroundColor': '#397598',
                         'color': '#d7ecf5',
+                        'borderColor': '#397598',
+                        'marginTop': '0.5rem',
+                        ":hover": {
+                            bgcolor: "#578DAD",
+                            color: "#d7ecf5"
+                          }
                     }} />
-                </div>
                 <span className="vancouver-bc">Vancouver, BC</span>
                 <span className="amazon">Amazon</span>
                 <span className="salary">Salary</span>
