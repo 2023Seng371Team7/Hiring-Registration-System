@@ -2,11 +2,15 @@ import * as React from "react";
 import { useState } from "react";
 import "./Login.css";
 import TextField from "@mui/material/TextField";
+import { useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
+import API from "../api";
+import myRoutes from "../routes";
 
 
 const App = () => {
+    const navigate = useNavigate()
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const onSubmit = async (e) => {
@@ -15,12 +19,13 @@ const App = () => {
     }
     const logIn = async (email, password) => {
         try {
-            let result = await axios.get(
-                "http://localhost:8080/api/login?username=" + email + "&password=" + password
+            let result = await API.get(
+                "api/login?username=" + email + "&password=" + password
             );
-
             if (result.status === 500)
                 alert("Incorrect password")
+            else
+                navigate(myRoutes.JobsListed)
         } catch (err) {
             console.error(err);
         }
@@ -48,7 +53,7 @@ const App = () => {
                     type="text"
                     sx={{
                         "width": "55%",
-                        'justify-content':'center',
+                        'justify-content': 'center',
                         "margin": "7px 0px 1.1rem",
                         "& .MuiInputBase-root": {
                             "borderRadius": "50px",
@@ -66,7 +71,7 @@ const App = () => {
                     sx={{
                         'width': '55%',
                         'margin': '0px 0px 0.7rem',
-                        'justify-content':'center',
+                        'justify-content': 'center',
                         "& .MuiInputBase-root": {
                             "borderRadius": "50px",
                             "height": "90%"
@@ -82,11 +87,11 @@ const App = () => {
                     ":hover": {
                         bgcolor: "#578DAD",
                         color: "#d7ecf5"
-                      }
+                    }
                 }}>Sign In</Button>
             </div>
             <span className="dont-have-an-account">
-                Don’t have an account? <Link to="/SignUp" style={{ 'color': '#FE9F70', 'textDecoration': 'None'}}>Join Now</Link>
+                Don’t have an account? <Link to="/SignUp" style={{ 'color': '#FE9F70', 'textDecoration': 'None' }}>Join Now</Link>
             </span>
         </div >
     );
