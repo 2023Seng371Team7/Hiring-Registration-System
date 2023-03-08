@@ -10,7 +10,7 @@ if [ "${BASE_URL: -1}" != "/" ]; then
 fi
 
 # Test login URL
-curl -sSf "${BASE_URL}api/login?user=$LOGIN_USERNAME&password=$LOGIN_PASSWORD" > /dev/null
+curl -sSf "${BASE_URL}api/login?username=$LOGIN_USERNAME&password=$LOGIN_PASSWORD" > /dev/null
 if [ $? -ne 0 ]; then
   echo "API_LOGIN='Error: ${BASE_URL}api/login/ returned a non-2xx response'"
   exit 1
