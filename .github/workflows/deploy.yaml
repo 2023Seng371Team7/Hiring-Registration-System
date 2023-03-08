@@ -65,7 +65,7 @@ jobs:
 
       - name: Build and Push Container 🏗️
         run: |-
-          docker build --build-arg  MongoConnectionString="${{ secrets.MONGOCONNECTIONSTRING }}" --build-arg SECRET_KEY='${{ secrets.SECRET_KEY }}' --build-arg AI_KEY='${{ secrets.AI_KEY }}' --cache-from=node:18-alpine --cache-from=python:3.9-alpine -t "${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.SERVICE }}/hiringsystem:${{ github.sha }}" ./ 
+          docker build --build-arg MongoConnectionString="${{ secrets.MONGOCONNECTIONSTRING }}" --build-arg SECRET_KEY='${{ secrets.SECRET_KEY }}' --build-arg AI_KEY='${{ secrets.AI_KEY }}' --cache-from=node:18-alpine --cache-from=python:3.9-alpine -t "${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.SERVICE }}/hiringsystem:${{ github.sha }}" ./ 
           docker push "${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.SERVICE }}/hiringsystem:${{ github.sha }}"
 
       # END - Docker auth and build
