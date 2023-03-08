@@ -2,7 +2,7 @@ from apis import models
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from utils import get_db_handle, generate_salt, encrypt, is_correct_password
+from utils import get_db_handle, generate_salt, encrypt
 
 
 # Create your views here.
@@ -19,7 +19,7 @@ class ManagerUpdate(APIView):
 
         # Generate salt
         salt = generate_salt()
-        hashed_password = str(encrypt(password, salt))
+        hashed_password = encrypt(password, salt)
 
         # Add username & password to DB
         newManager = models.User(username, "HRManager", salt, hashed_password)

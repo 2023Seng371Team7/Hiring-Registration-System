@@ -13,16 +13,16 @@ def get_db_handle(db_name):
     return db_handle, client
 
 
-def generate_salt():
-    return str(os.urandom(32))
+def generate_salt() -> bytes:
+    return os.urandom(32)
 
 
 def encrypt(password, salt):
-    return hash_new_password(password, salt.encode())
+    return hash_new_password(password, salt)
 
 
-def check_password(password, encryptedpassword, salt):
-    return is_correct_password(salt.encode(), encryptedpassword, password)
+def check_password(password: str, encryptedpassword: bytes, salt: bytes):
+    return is_correct_password(salt, encryptedpassword, password)
 
 
 def hash_new_password(password, salt: bytes):
