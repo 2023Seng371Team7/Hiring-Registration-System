@@ -2,7 +2,7 @@ from apis import models
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from utils import get_db_handle, generate_salt
+from utils import get_db_handle, generate_salt, encrypt
 
 
 # Create your views here.
@@ -19,8 +19,7 @@ class ManagerUpdate(APIView):
 
         # Generate salt
         salt = generate_salt()
-        saltyPassword = password + salt
-        hashed_password = str(hash(saltyPassword))
+        hashed_password = encrypt(password, salt)
 
         # Add username & password to DB
         newManager = models.User(username, "HRManager", salt, hashed_password)
@@ -35,7 +34,7 @@ class ManagerUpdate(APIView):
         result = collection.insert_one(newManagerDBItem)
         if result.acknowledged:
             return Response('', status=status.HTTP_200_OK)
-        return Response('', status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        return Response('Insertion failed', status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
     """
     DELETE
@@ -54,6 +53,6 @@ class ManagerUpdate(APIView):
             collection.delete_one({"username": username})
             return Response('', status=status.HTTP_200_OK)
         else:
-            return Response('', status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response('Unable to find user', status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 

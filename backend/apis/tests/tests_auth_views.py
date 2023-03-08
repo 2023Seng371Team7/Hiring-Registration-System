@@ -2,12 +2,13 @@ import unittest
 from django.test import Client
 from rest_framework import status
 from unittest.mock import Mock, patch
+from utils import encrypt
 
 
 # Helper method
 def fake_user(password: str, salt: str) -> dict:
-    fake_hash = str(hash(password + salt))
-    return {"hash": fake_hash, "salt": salt}
+    fake_hash = encrypt(password, salt.encode())
+    return {"hash": fake_hash, "salt": salt.encode(), "username": 'test_username', "role": "manager"}
 
 
 # Create your tests here.
@@ -32,4 +33,6 @@ class AuthViewsTestCase(unittest.TestCase):
         mock_user_to_find.return_value = fake_user(password='12345', salt='salt')
         response = self.client.get('/api/login?username=testuser1&password=1234')
         self.assertEqual(response.status_code, status.HTTP_500_INTERNAL_SERVER_ERROR)
+        self.assertEqual(response.content.decode(), '"Wrong username or password"')
+
 

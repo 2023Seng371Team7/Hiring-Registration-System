@@ -5,8 +5,8 @@ from django.db import models
 class User:
     role: str
     username: str
-    salt: str
-    hashed_password: str
+    salt: bytes
+    hashed_password: bytes
 
     def __init__(self, username, role, salt, hashed_password):
         self.username = username
