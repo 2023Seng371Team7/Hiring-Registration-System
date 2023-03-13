@@ -4,6 +4,7 @@ import JobDescription from "./JobDescription";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Job from "./Job";
+
 const App = () => {
     const propsData = {
         group6: {
@@ -16,10 +17,10 @@ const App = () => {
             children: "Find Jobs",
         },
         post1: {
-            amazon: "Amazon",
-            vancouverBc: "Vancouver, BC",
-            softwareTestingEng: "Software Testing Engineer",
-            num35AnHour: "$35 an hour",
+            company: "Amazon",
+            location: "Vancouver, BC",
+            title: "Software Testing Engineer",
+            salary: "$35 an hour",
         },
         jobDetails: {
             jobDescription: "Job Description",
@@ -39,6 +40,7 @@ const App = () => {
             salary: "Salary",
         },
     };
+
     return (
         <div className="job-postings">
             <div className="menu-background">
@@ -48,11 +50,6 @@ const App = () => {
                     </div>
                 </div>
                 <span className="my-applications">My Applications</span>
-                <div className="flex-container-1">
-                    <div className="cat-absolute-container">
-                        <span className="lgxwbhjlzydji">L</span>
-                    </div>
-                </div>
             </div>
             <div className="flex-container-2">
                 <TextField className="location" placeholder="Job Title, Company" sx={{
