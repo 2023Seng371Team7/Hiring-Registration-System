@@ -42,12 +42,16 @@ const App = () => {
     return (
         <div className="job-postings">
             <div className="menu-background">
-                <div className="flex-container-6">
-                    <div className="rectangle-6">
-                        <span className="job-postings-1">Job Postings</span>
+                <a href="/jobsListed">
+                    <div className="flex-container-6">
+                        <div className="rectangle-6">
+                            <span className="job-postings-1">Job Postings</span>
+                        </div>
                     </div>
-                </div>
-                <span className="my-applications">My Applications</span>
+                </a>
+                <a href="/myApplications">
+                    <span className="my-applications">My Applications</span>
+                </a>
                 <div className="flex-container-1">
                     <div className="cat-absolute-container">
                         <span className="lgxwbhjlzydji">L</span>
