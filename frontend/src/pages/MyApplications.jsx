@@ -11,8 +11,8 @@ const MyApplication = () => {
     const [relevantJobPostings, setRelevantJobPostings] = React.useState([]);
   
     React.useEffect(() => {
-      API.get("/api/applications").then((response) => {
-        setApplications(response.data);
+      API.get(`/api/applications?username="${localStorage.getItem('username')}"`).then((response) => {
+        setApplications(response.data.data ?? []);
       }).catch((error) => {
         console.log(error);
       });
@@ -20,8 +20,8 @@ const MyApplication = () => {
   
     const handleShowRelevantPostings = () => {
       if (applications.length > 0) {
-        API.post("/api/relevantpostings", { applications: applications }).then((response) => {
-          setRelevantJobPostings(response.data);
+        API.get(`/api/relevantpostings?username="${localStorage.getItem('username')}"`).then((response) => {
+          setRelevantJobPostings(response.data.data ?? []);
         }).catch((error) => {
           console.log(error);
         });
