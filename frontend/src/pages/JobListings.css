@@ -184,3 +184,8 @@
 .job-details-instance-1 {
     height: 100%;
 }
+
+a{
+    text-decoration: inherit;
+    color: inherit;
+}
