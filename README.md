@@ -31,3 +31,11 @@ python3 -m pip install dnspython # to install dnspython
 ```
 python3 manage.py runserver
 ```
+
+## Run Tests
+
+To run tests in the apis/tests folder, 
+
+```
+python3 manage.py test apis/tests -v 2
+```
