@@ -10,16 +10,15 @@ from rest_framework.response import Response
 from rest_framework import status
 
 
-class Job(APIView):
+class JobListings(APIView):
     # GET
     # Create method to Send all jobs using a job model array through GET API request  based on model JobListings.
-   # GET
-    # Gets a specific job based on the id of the job
     def get(self, request):
         db, _ = get_db_handle("HRS")
         collection = db['job_listings']
         jobs = collection.find()
+        job_list = []
         for job in jobs:
-            if job['id'] == request.data['id']:
-                return Response(job, status=status.HTTP_200_OK)
-        return Response(status=status.HTTP_404_NOT_FOUND)
+            job_list.append(models.JobListing(job['id'], job['title'], job['description'],
+                            job['location'], job['salary'], job['company'], job['date_posted'], job['url']))
+        return Response(job_list, status=status.HTTP_200_OK)
