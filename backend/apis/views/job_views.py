@@ -3,8 +3,8 @@
 # create using similiar structure of auth_views.py and manager_views.py
 # follow job model from models.py
 
-from backend.apis import models
-from backend.utils import get_db_handle
+from apis import models
+from utils import get_db_handle
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
