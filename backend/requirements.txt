@@ -9,3 +9,4 @@ python-snappy==0.6.1
 sqlparse==0.4.3
 djangorestframework==3.14.0
 openai==0.26.5
+django-cors-headers==3.14.0
