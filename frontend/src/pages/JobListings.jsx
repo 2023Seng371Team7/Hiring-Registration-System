@@ -23,21 +23,21 @@ const App = () => {
             salary: "$35 an hour",
         },
         jobDetails: {
-            jobDescription: "Job Description",
+            jobDescriptionHeading: "Job Description",
             button: {
                 disableElevation: false,
                 variant: "contained",
                 children: "Apply",
             },
-            num35AnHour: "$35 an hour",
-            educationSecondary:
+            salary: "$35 an hour",
+            educationExperience:
                 "Education: Secondary \n      (high) school graduation certificate\nExperience: Will train or equivalent \n      experience",
-            partTimeRemote: "Part-Time\nRemote",
-            jobType: "Job Type",
-            amazon: "Amazon",
-            softwareTestingEng: "Software Testing Engineer",
-            vancouverBc: "Vancouver, BC",
-            salary: "Salary",
+            jobType: "Part-Time\nRemote",
+            jobTypeHeading: "Job Type",
+            company: "Amazon",
+            title: "Software Testing Engineer",
+            location: "Vancouver, BC",
+            salaryHeading: "Salary",
         },
     };
 
@@ -49,6 +49,7 @@ const App = () => {
                         <span className="job-postings-1">Job Postings</span>
                     </div>
                 </div>
+                
                 <span className="my-applications">My Applications</span>
             </div>
             <div className="flex-container-2">

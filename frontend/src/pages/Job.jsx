@@ -4,10 +4,10 @@ const App = (props) => {
     return (
         <div className="post-3">
             <div className="rectangle-9">
-                <span className="software-testing-eng">{props.title}</span>
-                <span className="amazon">{props.company}</span>
-                <span className="vancouver-bc">{props.location}</span>
-                <span className="num-35-an-hour">{props.salary}</span>
+                <span className="title">{props.title}</span>
+                <span className="company">{props.company}</span>
+                <span className="location">{props.location}</span>
+                <span className="salary">{props.salary}</span>
             </div>
         </div>
     );
