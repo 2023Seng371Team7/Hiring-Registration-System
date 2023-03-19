@@ -30,6 +30,7 @@ const App = () => {
             description: "Education: Secondary \n      (high) school graduation certificate\nExperience: Will train or equivalent \n      experience",
             location: "Westerville, ON",
             salary: "32$ per hour",
+            jobType: "OnSite",
             company: "Elmer's Products Inc",
             date_posted: "15 January 2023",
             url: "www.elmers.com"
@@ -40,6 +41,7 @@ const App = () => {
             description: "Education: Secondary \n      (high) school graduation certificate\nExperience: Will train or equivalent \n      experience",
             location: "Stuttgart",
             salary: "30$ per hour",
+            jobType: "OnSite",
             company: "FlintGroup",
             date_posted: "17 March 2023",
             url: "www.google.com"
@@ -51,6 +53,7 @@ const App = () => {
             description: "Education: Secondary \n      (high) school graduation certificate\nExperience: Will train or equivalent \n      experience",
             location: "Toronto",
             salary: "36$ per hour",
+            jobType: "Remote",
             company: "Amazon",
             date_posted: "17 March 2023",
             url: "www.amazon.ca"
@@ -61,6 +64,7 @@ const App = () => {
             description: "Education: Secondary \n      (high) school graduation certificate\nExperience: Will train or equivalent \n      experience",
             location: "Toronto",
             salary: "36$ per hour",
+            jobType: "Remote",
             company: "Amazon",
             date_posted: "18 March 2023",
             url: "www.amazon.ca"
