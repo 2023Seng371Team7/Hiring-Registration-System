@@ -23,13 +23,13 @@ const App = (props) => {
                     }} />
                 <span className="location">{props.location}</span>
                 <span className="company">{props.company}</span>
-                <span className="salary-heading">{props.salaryHeading}</span>
+                <span className="salary-heading">Salary</span>
                 <span className="salary">{props.salary}</span>
-                <span className="job-type-heading">{props.jobTypeHeading}</span>
+                <span className="job-type-heading">Job Type</span>
                 <span className="job-type">{props.jobType}</span>
-                <span className="job-description-heading">{props.jobDescriptionHeading}</span>
-                <span className="education-experience">
-                    {props.educationExperience}
+                <span className="job-description-heading">Job Description</span>
+                <span className="job-description">
+                    {props.jobDescription}
                 </span>
             </div>
         </div>
