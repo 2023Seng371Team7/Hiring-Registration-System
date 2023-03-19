@@ -30,8 +30,6 @@ class Job(APIView):
     def post(self, request):
         db, _ = get_db_handle("HRS")
         collection = db['job_listings']
-        # create a joblisting object from the request data
-        # joblisting = models.JobListing(request.data)
         data = ast.literal_eval(json.dumps(request.data))
         job = collection.insert_one(data)
         if job.acknowledged:
@@ -43,8 +41,9 @@ class Job(APIView):
     def put(self, request):
         db, _ = get_db_handle("HRS")
         collection = db['job_listings']
+        data = ast.literal_eval(json.dumps(request.data))
         job = collection.update_one(
-            {"id": request.data['id']}, {"$set": request.data})
+            {"id": request.data['id']}, {"$set": data})
         return Response(job, status=status.HTTP_200_OK)
 
     # DELETE
