@@ -3,6 +3,8 @@
 # create using similiar structure of auth_views.py and manager_views.py
 # follow job model from models.py
 
+import json
+from marshal import dumps
 from apis import models
 from utils import get_db_handle
 from rest_framework.views import APIView
@@ -19,6 +21,6 @@ class JobListings(APIView):
         jobs = collection.find()
         job_list = []
         for job in jobs:
-            job_list.append(models.JobListing(job['id'], job['title'], job['description'],
-                            job['location'], job['salary'], job['company'], job['date_posted'], job['url']))
+            job_list.append(json.dumps({key: job[key] for key in [
+                            "id", "title", "description", "location", "salary", "company", "date_posted", "url"]}))
         return Response(job_list, status=status.HTTP_200_OK)
