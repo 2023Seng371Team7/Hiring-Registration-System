@@ -1,21 +1,15 @@
 import * as React from "react";
 import "./JobDescription.css";
 import Button from "@mui/material/Button";
-const App = () => {
-    const propsData = {
-        button: {
-            disableElevation: true,
-            variant: "contained",
-            children: "Apply",
-        }
-    }
+const App = (props) => {
+
     return (
         <div className="job-details">
             <div className="rectangle-5">
-                    <span className="software-testing-eng">
-                        Software Testing Engineer
+                    <span className="title">
+                       {props.title}
                     </span>
-                    <Button size="medium" {...propsData.button} sx={{
+                    <Button size="medium" variant= "contained" children= "Apply" sx={{
                         'borderRadius': '50px',
                         'alignSelf' : 'flex-start',
                         'backgroundColor': '#397598',
@@ -24,20 +18,21 @@ const App = () => {
                         'marginTop': '0.5rem',
                         ":hover": {
                             bgcolor: "#578DAD",
-                            color: "#d7ecf5"
+                            color: "#d7ecf5",
                           }
                     }} />
-                <span className="vancouver-bc">Vancouver, BC</span>
-                <span className="amazon">Amazon</span>
-                <span className="salary">Salary</span>
-                <span className="num-35-an-hour">$35 an hour</span>
-                <span className="job-type">Job Type</span>
-                <span className="part-time-remote">Part-Time Remote</span>
-                <span className="job-description">Job Description</span>
-                <span className="education-secondary">
-                    Education: Secondary (high) school graduation certificate Experience:
-                    Will train or equivalent experience
+                <span className="location">{props.location}</span>
+                <span className="company">{props.company}</span>
+                <span className="date-posted">{props.date_posted}</span>
+                <span className="salary-heading">Salary</span>
+                <span className="salary">{props.salary}</span>
+                <span className="job-type-heading">Job Type</span>
+                <span className="job-type">{props.jobType}</span>
+                <span className="job-description-heading">Job Description</span>
+                <span className="job-description">
+                    {props.description}
                 </span>
+                <span className="url">{props.url}</span>
             </div>
         </div>
     );

@@ -14,7 +14,7 @@ const App = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const onSubmit = async (e) => {
-        console.log(email + " " + password)
+        //console.log(email + " " + password)
         let result = await logIn(email, password)
     }
     const logIn = async (email, password) => {

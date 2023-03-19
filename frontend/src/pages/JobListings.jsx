@@ -4,7 +4,75 @@ import JobDescription from "./JobDescription";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Job from "./Job";
+import API from "../api";
+import { useState } from "react";
+
 const App = () => {
+    const [ selectJob, SetSelectJob] = useState({}); 
+    /*
+    ** api/jobListing is not ready yet. To uncomment the
+    ** block code when the endpoint is ready and fixed.
+    const jobsData = () => {
+
+        const allJobs = API.get(
+            "api/joblisting"
+        );
+
+        return allJobs;
+    }
+    */
+
+    // Mock jobsData.
+    // Remove it after api/jobslisting api is fixed.
+
+    const jobsData = [
+        {
+            id: "1",
+            title: "Project Manager",
+            description: "Education: Secondary \n      (high) school graduation certificate\nExperience: Will train or equivalent \n      experience",
+            location: "Westerville, ON",
+            salary: "32$ per hour",
+            jobType: "OnSite",
+            company: "Elmer's Products Inc",
+            date_posted: "15 January 2023",
+            url: "www.elmers.com"
+        },
+        {
+            id: "2",
+            title: "Art Director",
+            description: "Education: Secondary \n      (high) school graduation certificate\nExperience: Will train or equivalent \n      experience",
+            location: "Stuttgart",
+            salary: "30$ per hour",
+            jobType: "OnSite",
+            company: "FlintGroup",
+            date_posted: "17 March 2023",
+            url: "www.google.com"
+
+        },
+        {
+            id: "3",
+            title: "Software Testing Engineer",
+            description: "Education: Secondary \n      (high) school graduation certificate\nExperience: Will train or equivalent \n      experience",
+            location: "Toronto",
+            salary: "36$ per hour",
+            jobType: "Remote",
+            company: "Amazon",
+            date_posted: "17 March 2023",
+            url: "www.amazon.ca"
+        },
+        {
+            id: "4",
+            title: "Software Testing Engineer",
+            description: "Education: Secondary \n      (high) school graduation certificate\nExperience: Will train or equivalent \n      experience",
+            location: "Toronto",
+            salary: "36$ per hour",
+            jobType: "Remote",
+            company: "Amazon",
+            date_posted: "18 March 2023",
+            url: "www.amazon.ca"
+        }
+    ];
+
     const propsData = {
         group6: {
             id: "outlined-size-normal",
@@ -14,31 +82,13 @@ const App = () => {
             disableElevation: false,
             variant: "contained",
             children: "Find Jobs",
-        },
-        post1: {
-            amazon: "Amazon",
-            vancouverBc: "Vancouver, BC",
-            softwareTestingEng: "Software Testing Engineer",
-            num35AnHour: "$35 an hour",
-        },
-        jobDetails: {
-            jobDescription: "Job Description",
-            button: {
-                disableElevation: false,
-                variant: "contained",
-                children: "Apply",
-            },
-            num35AnHour: "$35 an hour",
-            educationSecondary:
-                "Education: Secondary \n      (high) school graduation certificate\nExperience: Will train or equivalent \n      experience",
-            partTimeRemote: "Part-Time\nRemote",
-            jobType: "Job Type",
-            amazon: "Amazon",
-            softwareTestingEng: "Software Testing Engineer",
-            vancouverBc: "Vancouver, BC",
-            salary: "Salary",
-        },
+        }
     };
+
+    function selectJobListing(joblisting){
+        SetSelectJob(joblisting)
+    };
+
     return (
         <div className="job-postings">
             <div className="menu-background">
@@ -90,14 +140,16 @@ const App = () => {
             </div>
             <div className="flex-container-3">
                 <div className="flex-container-5">
-                    <Job className="post-1-instance-1" {...propsData.post1} />
-                    <Job className="post-1-instance-1" {...propsData.post1} />
-                    <Job className="post-1-instance-1" {...propsData.post1} />
+                    {jobsData.map( joblisting => (
+                        <Button variant="text" onClick={() => selectJobListing(joblisting)}>
+                            <Job className="post-1-instance-1" {...joblisting} />
+                        </Button>
+                    ))}
                 </div>
                 <div className="flex-container-4">
                     <JobDescription
                         className="job-details-instance-1"
-                        {...propsData.jobDetails}
+                        {...selectJob}
                     />
                 </div>
             </div>
