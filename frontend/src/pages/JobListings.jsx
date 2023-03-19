@@ -5,8 +5,10 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Job from "./Job";
 import API from "../api";
+import { useState } from "react";
 
 const App = () => {
+    const [ selectJob, SetSelectJob] = useState({}); 
     /*
     ** api/jobListing is not ready yet. To uncomment the
     ** block code when the endpoint is ready and fixed.
@@ -20,7 +22,7 @@ const App = () => {
     }
     */
 
-    // Mockdata
+    // Mock jobsData.
     // Remove it after api/jobslisting api is fixed.
 
     const jobsData = [
@@ -81,43 +83,10 @@ const App = () => {
             variant: "contained",
             children: "Find Jobs",
         }
-        /*
-        post1: {
-            company: "Amazon",
-            location: "Vancouver, BC",
-            title: "Software Testing Engineer",
-            salary: "$35 an hour",
-        },
-        jobDetails1: {
-            ...jobsData,
-            jobDescriptionHeading: "Job Description",
-            button: {
-                disableElevation: false,
-                variant: "contained",
-                children: "Apply",
-            },
-            jobType: "Part-Time\nRemote",
-            jobTypeHeading: "Job Type",
-            salaryHeading: "Salary",
-        },
+    };
 
-        jobDetails: {
-            jobDescriptionHeading: "Job Description",
-            button: {
-                disableElevation: false,
-                variant: "contained",
-                children: "Apply",
-            },
-            salary: "$35 an hour",
-            jobDescription:
-                "Education: Secondary \n      (high) school graduation certificate\nExperience: Will train or equivalent \n      experience",
-            jobType: "Part-Time\nRemote",
-            jobTypeHeading: "Job Type",
-            company: "Amazon",
-            title: "Software Testing Engineer",
-            location: "Vancouver, BC",
-            salaryHeading: "Salary",
-        },*/
+    function selectJobListing(joblisting){
+        SetSelectJob(joblisting)
     };
 
     return (
@@ -172,13 +141,15 @@ const App = () => {
             <div className="flex-container-3">
                 <div className="flex-container-5">
                     {jobsData.map( joblisting => (
-                        <Job className="post-1-instance-1" {...joblisting} />
+                        <Button variant="text" onClick={() => selectJobListing(joblisting)}>
+                            <Job className="post-1-instance-1" {...joblisting} />
+                        </Button>
                     ))}
                 </div>
                 <div className="flex-container-4">
                     <JobDescription
                         className="job-details-instance-1"
-                        {...jobsData[0]}
+                        {...selectJob}
                     />
                 </div>
             </div>

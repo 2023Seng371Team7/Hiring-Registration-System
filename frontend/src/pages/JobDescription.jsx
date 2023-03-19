@@ -9,7 +9,7 @@ const App = (props) => {
                     <span className="title">
                        {props.title}
                     </span>
-                    <Button size="medium" disableElevation="false" variant= "contained" children= "Apply" sx={{
+                    <Button size="medium" variant= "contained" children= "Apply" sx={{
                         'borderRadius': '50px',
                         'alignSelf' : 'flex-start',
                         'backgroundColor': '#397598',
@@ -18,7 +18,7 @@ const App = (props) => {
                         'marginTop': '0.5rem',
                         ":hover": {
                             bgcolor: "#578DAD",
-                            color: "#d7ecf5"
+                            color: "#d7ecf5",
                           }
                     }} />
                 <span className="location">{props.location}</span>
