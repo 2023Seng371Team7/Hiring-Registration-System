@@ -12,7 +12,8 @@ const App = () => {
     const [ selectJob, setSelectJob] = useState({}); 
     const [ allJobs, setAllJobs] = useState([]);
     const [ filteredJobs, setFilteredJobs] = useState([]);
-    const [inputValue, setInputValue] = useState('');
+    const [ jobTitleCompany, setTitleCompany] = useState('');
+    const [ jobLocation, setJobLocation] = useState('');
 
 
     /*
@@ -73,7 +74,7 @@ const App = () => {
             id: "4",
             title: "Software Testing Engineer",
             description: "Education: Secondary \n      (high) school graduation certificate\nExperience: Will train or equivalent \n      experience",
-            location: "Toronto",
+            location: "Vancouver",
             salary: "36$ per hour",
             jobType: "Remote",
             company: "Amazon",
@@ -96,7 +97,7 @@ const App = () => {
     const propsData = {
         group6: {
             id: "outlined-size-normal",
-            label: "Job Title, Company",
+            label: "Job Title or Company",
         },
         button: {
             disableElevation: false,
@@ -110,12 +111,20 @@ const App = () => {
     };
 
     const handleSearch = () => {
-        let searchTerm = inputValue.toLowerCase()
-        if(searchTerm === ""){
+        let titleCompany = jobTitleCompany.toLowerCase()
+        let location = jobLocation.toLowerCase()
+
+        if(titleCompany === "" && location === ""){
           setFilteredJobs(allJobs)
         }
-        else{
-        setFilteredJobs(allJobs.filter(jobItem => jobItem.title.toLowerCase().includes(searchTerm)))  
+        else if(location === ""){
+        setFilteredJobs(allJobs.filter(jobItem => jobItem.title.toLowerCase().includes(titleCompany) || jobItem.company.toLowerCase().includes(titleCompany)))
+        }
+        else if(titleCompany === ""){
+        setFilteredJobs(allJobs.filter(jobItem => jobItem.location.toLowerCase().includes(location)))
+        }
+        else {
+        setFilteredJobs(allJobs.filter(jobItem => (jobItem.title.toLowerCase().includes(titleCompany) || jobItem.company.toLowerCase().includes(titleCompany)) && jobItem.location.toLowerCase().includes(location)))            
         }
       } 
     
@@ -140,7 +149,7 @@ const App = () => {
                 </div>
             </div>
             <div className="flex-container-2">
-                <TextField onChange={(e)=>setInputValue(e.target.value)} className="location" placeholder="Job Title, Company" sx={{
+                <TextField type="search" onChange={(e)=>setTitleCompany(e.target.value)} className="location" placeholder="Job Title or Company" sx={{
                     'width': '30%',
                     'flexBasis': '30%',
                     'marginTop': '5px',
@@ -148,7 +157,7 @@ const App = () => {
                         "borderRadius": "50px",
                     }
                 }} />
-                <TextField className="location" placeholder="Location" sx={{
+                <TextField type="search" onChange={(e)=>setJobLocation(e.target.value)} className="location" placeholder="Location" sx={{
                     'width': '30%',
                     'flexBasis': '30%',
                     'marginTop': '5px',
