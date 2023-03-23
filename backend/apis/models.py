@@ -36,3 +36,26 @@ class JobListing:
         self.company = company
         self.date_posted = date_posted
         self.url = url
+
+# create model for job application that has a field for rejected or accepted and a field for applicants as a list and fields such as job id, applicant name and email and education and experience
+
+
+class JobApplication:
+    application_id: int
+    job_id: int
+    applicant_name: str
+    applicant_email: str
+    applicant_education: str
+    applicant_experience: str
+    applicant_status: str
+    date_applied: str
+
+    def __init__(self, application_id, job_id, applicant_name, applicant_email, applicant_education, applicant_experience, applicant_status, date_applied):
+        self.application_id = application_id
+        self.job_id = job_id
+        self.applicant_name = applicant_name
+        self.applicant_email = applicant_email
+        self.applicant_education = applicant_education
+        self.applicant_experience = applicant_experience
+        self.applicant_status = applicant_status
+        self.date_applied = date_applied

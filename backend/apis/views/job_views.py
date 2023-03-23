@@ -44,7 +44,9 @@ class Job(APIView):
         data = ast.literal_eval(json.dumps(request.data))
         job = collection.update_one(
             {"id": request.data['id']}, {"$set": data})
-        return Response(job, status=status.HTTP_200_OK)
+        if job.acknowledged:
+            return Response(request.data, status=status.HTTP_200_OK)
+        return Response("Unsuccessful Update", status=status.HTTP_404_NOT_FOUND)
 
     # DELETE
     # Create method to delete job using a job model array through DELETE API request  based on model JobListings.
@@ -52,4 +54,6 @@ class Job(APIView):
         db, _ = get_db_handle("HRS")
         collection = db['job_listings']
         job = collection.delete_one({"id": request.data['id']})
-        return Response(job, status=status.HTTP_200_OK)
+        if job.acknowledged:
+            return Response("Job Listing Deleted", status=status.HTTP_200_OK)
+        return Response("Unsuccessful Deletion", status=status.HTTP_404_NOT_FOUND)
