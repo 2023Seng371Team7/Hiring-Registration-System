@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useEffect } from 'react';
 import "./JobListings.css";
 import JobDescription from "./JobDescription";
 import TextField from "@mui/material/TextField";
@@ -8,7 +9,13 @@ import API from "../api";
 import { useState } from "react";
 
 const App = () => {
-    const [ selectJob, SetSelectJob] = useState({}); 
+    const [ selectJob, setSelectJob] = useState({}); 
+    const [ allJobs, setAllJobs] = useState([]);
+    const [ filteredJobs, setFilteredJobs] = useState([]);
+    const [ jobTitleCompany, setTitleCompany] = useState('');
+    const [ jobLocation, setJobLocation] = useState('');
+
+
     /*
     ** api/jobListing is not ready yet. To uncomment the
     ** block code when the endpoint is ready and fixed.
@@ -17,6 +24,9 @@ const App = () => {
         const allJobs = API.get(
             "api/joblisting"
         );
+        
+        setAllJobs(allJobs);
+        setSelectJob(allJobs);
 
         return allJobs;
     }
@@ -64,7 +74,7 @@ const App = () => {
             id: "4",
             title: "Software Testing Engineer",
             description: "Education: Secondary \n      (high) school graduation certificate\nExperience: Will train or equivalent \n      experience",
-            location: "Toronto",
+            location: "Vancouver",
             salary: "36$ per hour",
             jobType: "Remote",
             company: "Amazon",
@@ -73,10 +83,21 @@ const App = () => {
         }
     ];
 
+    const fetchData = () => {
+
+        setFilteredJobs(jobsData);
+        setAllJobs(jobsData);
+    }
+
+    useEffect(() => {
+        fetchData();
+      }, []);
+    
+
     const propsData = {
         group6: {
             id: "outlined-size-normal",
-            label: "Job Title, Company",
+            label: "Job Title or Company",
         },
         button: {
             disableElevation: false,
@@ -86,8 +107,27 @@ const App = () => {
     };
 
     function selectJobListing(joblisting){
-        SetSelectJob(joblisting)
+        setSelectJob(joblisting)
     };
+
+    const handleSearch = () => {
+        let titleCompany = jobTitleCompany.toLowerCase()
+        let location = jobLocation.toLowerCase()
+
+        if(titleCompany === "" && location === ""){
+          setFilteredJobs(allJobs)
+        }
+        else if(location === ""){
+        setFilteredJobs(allJobs.filter(jobItem => jobItem.title.toLowerCase().includes(titleCompany) || jobItem.company.toLowerCase().includes(titleCompany)))
+        }
+        else if(titleCompany === ""){
+        setFilteredJobs(allJobs.filter(jobItem => jobItem.location.toLowerCase().includes(location)))
+        }
+        else {
+        setFilteredJobs(allJobs.filter(jobItem => (jobItem.title.toLowerCase().includes(titleCompany) || jobItem.company.toLowerCase().includes(titleCompany)) && jobItem.location.toLowerCase().includes(location)))            
+        }
+      } 
+    
 
     return (
         <div className="job-postings">
@@ -109,7 +149,7 @@ const App = () => {
                 </div>
             </div>
             <div className="flex-container-2">
-                <TextField className="location" placeholder="Job Title, Company" sx={{
+                <TextField type="search" onChange={(e)=>setTitleCompany(e.target.value)} className="location" placeholder="Job Title or Company" sx={{
                     'width': '30%',
                     'flexBasis': '30%',
                     'marginTop': '5px',
@@ -117,7 +157,7 @@ const App = () => {
                         "borderRadius": "50px",
                     }
                 }} />
-                <TextField className="location" placeholder="Location" sx={{
+                <TextField type="search" onChange={(e)=>setJobLocation(e.target.value)} className="location" placeholder="Location" sx={{
                     'width': '30%',
                     'flexBasis': '30%',
                     'marginTop': '5px',
@@ -125,7 +165,7 @@ const App = () => {
                         "borderRadius": "50px"
                     }
                 }} />
-                <Button className="button-instance" size="medium" {...propsData.button} sx={{
+                <Button onClick={handleSearch} className="button-instance" size="medium" {...propsData.button} sx={{
                    'borderRadius': '50px',
                     'backgroundColor': '#397598',
                     'color': '#d7ecf5',
@@ -140,7 +180,7 @@ const App = () => {
             </div>
             <div className="flex-container-3">
                 <div className="flex-container-5">
-                    {jobsData.map( joblisting => (
+                    {filteredJobs.map( joblisting => (
                         <Button variant="text" onClick={() => selectJobListing(joblisting)}>
                             <Job className="post-1-instance-1" {...joblisting} />
                         </Button>
