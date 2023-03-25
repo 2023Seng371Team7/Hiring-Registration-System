@@ -10,7 +10,6 @@ import { useParams } from "react-router-dom";
 
 const App = () => {
     const { id } = useParams();
-    const [ selectJob, setSelectJob] = useState({}); 
     const [ applicants, setApplicants] = useState([]);
     const [ filteredApplicants, setFilteredApplicants] = useState([]);
     const [ applicantSearchName, setApplicantSearchName] = useState('');
@@ -37,14 +36,10 @@ const App = () => {
     
 
     const propsData = {
-        group6: {
-            id: "outlined-size-normal",
-            label: "Job Title or Company",
-        },
         button: {
             disableElevation: false,
             variant: "contained",
-            children: "Find Jobs",
+            children: "Search",
         }
     };
     
@@ -79,15 +74,15 @@ const App = () => {
     return (
         <div className="job-postings">
             <div className="menu-background">
-                <a href="/jobsListed">
+                <a href="/applicants/1">
                     <div className="flex-container-6">
                         <div className="rectangle-6">
-                            <span className="job-postings-1">Job Postings</span>
+                            <span className="job-postings-1">Applicants | Job ID {id}</span>
                         </div>
                     </div>
                 </a>
-                <a href="/myApplications">
-                    <span className="my-applications">My Applications</span>
+                <a href="/jobs">
+                    <span className="my-applications">Jobs</span>
                 </a>
                 <div className="flex-container-1">
                     <div className="cat-absolute-container">
@@ -96,7 +91,7 @@ const App = () => {
                 </div>
             </div>
             <div className="flex-container-2">
-                <TextField type="search" onChange={(e)=>setApplicantSearchName(e.target.value)} className="location" placeholder="Job Title or Company" sx={{
+                <TextField type="search" onChange={(e)=>setApplicantSearchName(e.target.value)} className="location" placeholder="ApplicantName" sx={{
                     'width': '30%',
                     'flexBasis': '30%',
                     'marginTop': '5px',
@@ -104,7 +99,7 @@ const App = () => {
                         "borderRadius": "50px",
                     }
                 }} />
-                <TextField type="search" onChange={(e)=>setApplicantSearchEmail(e.target.value)} className="location" placeholder="Location" sx={{
+                <TextField type="search" onChange={(e)=>setApplicantSearchEmail(e.target.value)} className="location" placeholder="ApplicantEmail" sx={{
                     'width': '30%',
                     'flexBasis': '30%',
                     'marginTop': '5px',
