@@ -11,6 +11,7 @@ import myRoutes from './routes';
 
 const Router = () => (
 	<Routes>
+		<Route path={myRoutes.Home} index element={<LoginPage />} />
 		<Route path={myRoutes.LogIn} index element={<LoginPage />} />
 		<Route path={myRoutes.SignUp} index element={<SignUpPage />} />
 		<Route path={myRoutes.JobsListed} index element={<JobListing />} />
