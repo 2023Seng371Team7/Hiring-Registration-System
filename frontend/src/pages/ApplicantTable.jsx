@@ -39,7 +39,6 @@ export default function BasicTable(props) {
             <TableCell align="right">Date Applied</TableCell>
             <TableCell align="right">Name</TableCell>
             <TableCell align="right">Email</TableCell>
-            <TableCell align="right">Education</TableCell>
             <TableCell align="center">Status</TableCell>
           </TableRow>
         </TableHead>
@@ -54,7 +53,6 @@ export default function BasicTable(props) {
                 {row.name}
               </TableCell>
               <TableCell align="right">{row.email}</TableCell>
-              <TableCell align="right">{row.education}</TableCell>
               <TableCell align="right">
                 <Select
                   value = "Pending"
