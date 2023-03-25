@@ -6,6 +6,7 @@ const myRoutes = {
     AddJob: "/addJob",
     AddGroup: "/applyJob",
     MyApplications: "/myApplications",
+    Applicants: "/applicants/:id",
 };
 
 export default myRoutes
