@@ -189,3 +189,18 @@ a{
     text-decoration: inherit;
     color: inherit;
 }
+
+.apply {
+    height: 100%;
+    width: 80%;
+    background-color: #fff;
+    border-radius: 50px;
+    flex-direction: column;
+    flex-basis: 100%;
+    justify-content: space-evenly;
+    align-items: stretch;
+    padding: 10px 13px 56px 36px;
+    display: flex;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.2);
+
+}

@@ -9,18 +9,6 @@ const App = (props) => {
                     <span className="title">
                        {props.title}
                     </span>
-                    <Button size="medium" variant= "contained" children= "Apply" sx={{
-                        'borderRadius': '50px',
-                        'alignSelf' : 'flex-start',
-                        'backgroundColor': '#397598',
-                        'color': '#d7ecf5',
-                        'borderColor': '#397598',
-                        'marginTop': '0.5rem',
-                        ":hover": {
-                            bgcolor: "#578DAD",
-                            color: "#d7ecf5",
-                          }
-                    }} />
                 <span className="location">{props.location}</span>
                 <span className="company">{props.company}</span>
                 <span className="date-posted">{props.date_posted}</span>

@@ -14,6 +14,7 @@ const App = () => {
     const [ filteredJobs, setFilteredJobs] = useState([]);
     const [ jobTitleCompany, setTitleCompany] = useState('');
     const [ jobLocation, setJobLocation] = useState('');
+    const [ state, setState] = useState('');
 
     const fetchData = () => {
         
@@ -25,11 +26,12 @@ const App = () => {
         .then((jobsListed) => {
             setAllJobs(jobsListed)
             setFilteredJobs(jobsListed);
+            setState("Jobs");
             //console.log(jobsListed);
         })        
         
     }
-
+    
     useEffect(() => {
         fetchData();
       }, []);
@@ -51,6 +53,9 @@ const App = () => {
         setSelectJob(joblisting)
     };
 
+    function setApplyState(){
+        setState("Apply")
+    };
     const handleSearch = () => {
         let titleCompany = jobTitleCompany.toLowerCase()
         let location = jobLocation.toLowerCase()
@@ -119,14 +124,78 @@ const App = () => {
                         color: "#d7ecf5"
                       }
                 }} />
+                <Button size="medium" onClick={setApplyState} variant= "contained"  children= "Apply" sx={{
+                        'borderRadius': '50px',
+                        'alignSelf' : 'flex-start',
+                        'backgroundColor': '#397598',
+                        'color': '#d7ecf5',
+                        'borderColor': '#397598',
+                        'marginTop': '0.5rem',
+                        ":hover": {
+                            bgcolor: "#578DAD",
+                            color: "#d7ecf5",
+                          }
+                    }} />
             </div>
             <div className="flex-container-3">
                 <div className="flex-container-5">
-                    {filteredJobs.map( joblisting => (
+                    {state ==="Jobs" && filteredJobs.map( joblisting => (
                         <Button variant="text" onClick={() => selectJobListing(joblisting)}>
                             <Job className="post-1-instance-1" {...joblisting} />
                         </Button>
                     ))}
+                    {state ==="Apply" && 
+                    <div className="apply">
+                                         
+                    <label>First Name</label>
+
+                    <TextField placeholder="Required" sx={{
+                    'width': '100%',
+                    'flexBasis': '100%',
+                    'marginTop': '5px',
+                    "& .MuiInputBase-root": {
+                        "borderRadius": "50px",
+                    }
+                }} />
+                <label>Last Name</label>
+                <TextField placeholder="Required" sx={{
+                    'width': '100%',
+                    'flexBasis': '100%',
+                    'marginTop': '5px',
+                    "& .MuiInputBase-root": {
+                        "borderRadius": "50px"
+                    }
+                }} />
+                <label>Email Address</label>                
+                <TextField placeholder="Required" sx={{
+                    'width': '100%',
+                    'flexBasis': '30%',
+                    'marginTop': '5px',
+                    "& .MuiInputBase-root": {
+                        "borderRadius": "50px"
+                    }
+                }} />
+                <label>Phone</label>      
+                <TextField placeholder="Required" sx={{
+                    'width': '100%',
+                    'flexBasis': '30%',
+                    'marginTop': '5px',
+                    "& .MuiInputBase-root": {
+                        "borderRadius": "50px"
+                    }
+                }} />
+                <label>Previous Work Experience</label>      
+                <TextField placeholder="Required" sx={{
+                    'width': '100%',
+                    'flexBasis': '30%',
+                    'marginTop': '5px',
+                    "& .MuiInputBase-root": {
+                        "borderRadius": "50px"
+                    }
+                }} />
+                    </div>
+
+                    }
                 </div>
                 <div className="flex-container-4">
                     <JobDescription
