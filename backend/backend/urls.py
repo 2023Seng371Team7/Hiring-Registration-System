@@ -24,7 +24,7 @@ urlpatterns = [
     path("applyJob", include("frontend.urls")),
     path("myApplications", include("frontend.urls")),
     path("jobsListed", include("frontend.urls")),
-    path("applicant/<int:id>", include("frontend.urls")),
+    path("applicants/<int:id>", include("frontend.urls")),
     path("", include("frontend.urls")),
     path("api/", include("apis.urls"))
 ]
