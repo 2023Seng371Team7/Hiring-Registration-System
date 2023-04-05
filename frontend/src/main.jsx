@@ -5,7 +5,8 @@ import JobListing from './pages/JobListings';
 import MyApplications from './pages/MyApplications';
 import LoginPage from './pages/Login';
 import SignUpPage from './pages/SignUp';
-import ViewApplicants from './pages/ViewApplicants'
+import ViewApplicants from './pages/ViewApplicants';
+import Admin from './pages/Admin';
 import myRoutes from './routes';
 
 
@@ -17,6 +18,7 @@ const Router = () => (
 		<Route path={myRoutes.JobsListed} index element={<JobListing />} />
 		<Route path={myRoutes.MyApplications} index element={<MyApplications />} />
 		<Route path={myRoutes.Applicants} index element={<ViewApplicants />} />
+		<Route path={myRoutes.Admin} index element={<Admin />} />
 	</Routes>
 )
 
