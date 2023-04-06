@@ -6,7 +6,8 @@ const myRoutes = {
     AddJob: "/addJob",
     AddGroup: "/applyJob",
     MyApplications: "/myApplications",
-    JobApply: "/jobApply",
+    Applicants: "/applicants/:id",
+    Admin: "/hradmin",
 };
 
 export default myRoutes

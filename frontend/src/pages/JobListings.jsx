@@ -23,6 +23,7 @@ const App = () => {
 
     const monthMap = ['January', 'Februaury', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
+
     const fetchData = () => {
         
         API.get(
@@ -38,6 +39,7 @@ const App = () => {
         })        
         
     }
+
 
     const sendApplication = () => {
 
@@ -95,8 +97,9 @@ const App = () => {
             //Call the API to post the applicant details. 
             sendApplication()
         }
-        
+       
     };
+    
     const handleSearch = () => {
         let titleCompany = jobTitleCompany.toLowerCase()
         let location = jobLocation.toLowerCase()
@@ -190,6 +193,7 @@ const App = () => {
                                          
                     <label>First Name</label>
 
+
                     <TextField placeholder="Required" onChange={(e)=>setFirstName(e.target.value)} sx={{
                     'width': '100%',
                     'flexBasis': '100%',
@@ -208,6 +212,7 @@ const App = () => {
                     }
                 }} />
                 <label>Email Address</label>                
+
                 <TextField placeholder="Required" onChange={(e)=>setEmailAddress(e.target.value)} sx={{
                     'width': '100%',
                     'flexBasis': '30%',
@@ -216,7 +221,7 @@ const App = () => {
                         "borderRadius": "50px"
                     }
                 }} />
-                <label>Phone</label>      
+                <label>Phone</label>
                 <TextField placeholder="Required" onChange={(e)=>setPhoneNumber(e.target.value)} sx={{
                     'width': '100%',
                     'flexBasis': '30%',
@@ -226,6 +231,7 @@ const App = () => {
                     }
                 }} />
                 <label>Previous Work Experience</label>      
+
                 <TextField placeholder="Required" onChange={(e)=>setWorkExperience(e.target.value)} sx={{
                     'width': '100%',
                     'flexBasis': '30%',
