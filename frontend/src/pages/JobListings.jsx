@@ -14,6 +14,14 @@ const App = () => {
     const [ filteredJobs, setFilteredJobs] = useState([]);
     const [ jobTitleCompany, setTitleCompany] = useState('');
     const [ jobLocation, setJobLocation] = useState('');
+    const [ firstName, setFirstName] = useState('');
+    const [ lastName, setLastName] = useState('');
+    const [ emailAddress, setEmailAddress] = useState('');
+    const [ phoneNumber, setPhoneNumber] = useState('');
+    const [ workExperience, setWorkExperience] = useState('');
+    const [ state, setState] = useState('');
+
+    const monthMap = ['January', 'Februaury', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
     const fetchData = () => {
         
@@ -25,11 +33,38 @@ const App = () => {
         .then((jobsListed) => {
             setAllJobs(jobsListed)
             setFilteredJobs(jobsListed);
+            setState("Jobs");
             //console.log(jobsListed);
         })        
         
     }
 
+    const sendApplication = () => {
+
+        const date = new Date()
+        var body = {
+            "applicant_name": firstName + " " + lastName,
+            "applicant_email": emailAddress,
+            "applicant_experience": workExperience,
+            "applicant_phone": phoneNumber,
+            "job_id": selectJob.id,
+            "applicant_id": "1",
+            "applicant_status": "Pending",
+            "date_applied": `${date.getDate()} ${monthMap[date.getMonth()]} ${date.getFullYear()}`
+        }
+
+        API.post(
+            "api/jobApplications",
+            body
+        ).then(() => {
+            // print success message notification
+            console.log("Successfully sent body: " + JSON.stringify(body))
+            // set state back to "Jobs"
+            setState("Jobs")
+        })
+
+    }
+    
     useEffect(() => {
         fetchData();
       }, []);
@@ -51,6 +86,17 @@ const App = () => {
         setSelectJob(joblisting)
     };
 
+    function setApplyState(){
+
+        if( state==="Jobs"){
+            setState("Apply")
+        }
+        else{
+            //Call the API to post the applicant details. 
+            sendApplication()
+        }
+        
+    };
     const handleSearch = () => {
         let titleCompany = jobTitleCompany.toLowerCase()
         let location = jobLocation.toLowerCase()
@@ -119,14 +165,78 @@ const App = () => {
                         color: "#d7ecf5"
                       }
                 }} />
+                <Button size="medium" onClick={setApplyState} variant= "contained"  children= "Apply" sx={{
+                        'borderRadius': '50px',
+                        'alignSelf' : 'flex-start',
+                        'backgroundColor': '#397598',
+                        'color': '#d7ecf5',
+                        'borderColor': '#397598',
+                        'marginTop': '0.5rem',
+                        ":hover": {
+                            bgcolor: "#578DAD",
+                            color: "#d7ecf5",
+                          }
+                    }} />
             </div>
             <div className="flex-container-3">
                 <div className="flex-container-5">
-                    {filteredJobs.map( joblisting => (
+                    {state ==="Jobs" && filteredJobs.map( joblisting => (
                         <Button variant="text" onClick={() => selectJobListing(joblisting)}>
                             <Job className="post-1-instance-1" {...joblisting} />
                         </Button>
                     ))}
+                    {state ==="Apply" && 
+                    <div className="apply">
+                                         
+                    <label>First Name</label>
+
+                    <TextField placeholder="Required" onChange={(e)=>setFirstName(e.target.value)} sx={{
+                    'width': '100%',
+                    'flexBasis': '100%',
+                    'marginTop': '5px',
+                    "& .MuiInputBase-root": {
+                        "borderRadius": "50px",
+                    }
+                }} />
+                <label>Last Name</label>
+                <TextField placeholder="Required" onChange={(e)=>setLastName(e.target.value)} sx={{
+                    'width': '100%',
+                    'flexBasis': '100%',
+                    'marginTop': '5px',
+                    "& .MuiInputBase-root": {
+                        "borderRadius": "50px"
+                    }
+                }} />
+                <label>Email Address</label>                
+                <TextField placeholder="Required" onChange={(e)=>setEmailAddress(e.target.value)} sx={{
+                    'width': '100%',
+                    'flexBasis': '30%',
+                    'marginTop': '5px',
+                    "& .MuiInputBase-root": {
+                        "borderRadius": "50px"
+                    }
+                }} />
+                <label>Phone</label>      
+                <TextField placeholder="Required" onChange={(e)=>setPhoneNumber(e.target.value)} sx={{
+                    'width': '100%',
+                    'flexBasis': '30%',
+                    'marginTop': '5px',
+                    "& .MuiInputBase-root": {
+                        "borderRadius": "50px"
+                    }
+                }} />
+                <label>Previous Work Experience</label>      
+                <TextField placeholder="Required" onChange={(e)=>setWorkExperience(e.target.value)} sx={{
+                    'width': '100%',
+                    'flexBasis': '30%',
+                    'marginTop': '5px',
+                    "& .MuiInputBase-root": {
+                        "borderRadius": "50px"
+                    }
+                }} />
+                    </div>
+
+                    }
                 </div>
                 <div className="flex-container-4">
                     <JobDescription
