@@ -5,6 +5,7 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import Button from '@mui/material/Button';
 import Paper from '@mui/material/Paper';
 import Select from '@mui/material/Select';
 import {useState} from 'react';
@@ -23,15 +24,10 @@ const rows = [
 ];
 
 export default function BasicTable(props) {
-    const {menuOpen, setMenuOpen} = useState(false);
-    const {menuDisplay, setMenuDisplay} = useState("Pending");
+  const [menuOpen, setMenuOpen] = useState(rows.map(row => 0));
 
-    function handleMenuClick(status, value) {
-        //setMenuOpen(!menuOpen);
-        status = value;
-    };
 
-  return (
+  return (<>
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 690 }} aria-label="simple table">
         <TableHead>
@@ -43,7 +39,7 @@ export default function BasicTable(props) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+          {rows.map((row, i) => (
             <TableRow
               key={row.name}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -55,12 +51,16 @@ export default function BasicTable(props) {
               <TableCell align="right">{row.email}</TableCell>
               <TableCell align="right">
                 <Select
-                  value = "Pending"
-                  open = {menuOpen} 
+                  value = {menuOpen[i] ?? 0}
+                  onChange={(event) => {
+                    const newMenuOpen = [...menuOpen];
+                    newMenuOpen[i] = event.target.value;
+                    setMenuOpen(newMenuOpen);
+                  }}
                 >
-                    <MenuItem value="Pending">Pending</MenuItem>
-                    <MenuItem value="Hire">Hire </MenuItem>
-                    <MenuItem value="Reject">Reject </MenuItem>
+                    <MenuItem value={0}>Pending</MenuItem>
+                    <MenuItem value={1}>Hire </MenuItem>
+                    <MenuItem value={2}>Reject </MenuItem>
                 </Select>
 
               </TableCell>
@@ -69,5 +69,10 @@ export default function BasicTable(props) {
         </TableBody>
       </Table>
     </TableContainer>
-  );
+    <div style={{ display: 'flex', justifyContent: 'center' }}>
+      <Button onClick={() => {
+        setMenuOpen(menuOpen.map(val => val == 0 ? 2 : val))
+      }} >Reject All Remaining</Button>
+    </div>
+  </>);
 }
