@@ -26,7 +26,11 @@ const App = () => {
                 localStorage.setItem('username', email);
                 if (result.data.roll === "Admin") {
                     navigate("/applicants/1");
-                } else {
+                } 
+                else if(result.data.roll == "Manager"){
+                    navigate(myRoutes.Admin);
+                }
+                else {
                     navigate(myRoutes.JobsListed);
                 }
             }
