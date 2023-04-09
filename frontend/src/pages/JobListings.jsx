@@ -1,5 +1,6 @@
 import * as React from "react";
 import { useEffect } from 'react';
+import { redirect, useNavigate } from "react-router-dom";
 import "./JobListings.css";
 import JobDescription from "./JobDescription";
 import TextField from "@mui/material/TextField";
@@ -8,8 +9,10 @@ import { Menu, MenuItem, Dialog, DialogContent, DialogContentText, DialogActions
 import Job from "./Job";
 import API from "../api";
 import { useState } from "react";
+import myRoutes from "../routes";
 
 const App = () => {
+    const navigate = useNavigate();
     const [ selectJob, setSelectJob] = useState({}); 
     const [ allJobs, setAllJobs] = useState([]);
     const [ filteredJobs, setFilteredJobs] = useState([]);
@@ -94,9 +97,16 @@ const App = () => {
         setDeleteAccountDialogOpen(!deleteAccountDialogOpen);
     };
 
-    const handleProfileDeletion = () => {
+    const handleProfileDeletion = async () => {
         // Send API request to delete
-        // Then redirect to Login page. 
+        let result = await API.delete(
+            "api/managerupdate?username=" + localStorage.getItem("username"));
+        
+        if(result.status === 200){
+            // Then redirect to Login page.
+            setDeleteAccountDialogOpen(false);
+            navigate(myRoutes.LogIn);
+        }
     };
 
     return (
