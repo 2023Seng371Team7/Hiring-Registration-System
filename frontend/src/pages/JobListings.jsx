@@ -21,8 +21,15 @@ const App = () => {
     const [ deleteAccountDialogOpen, setDeleteAccountDialogOpen] = useState(false);
     const [ anchorEl, setAnchorEl] = useState(null);
     const [ state, setState] = useState('');
-
+    const [ firstName, setFirstName] = useState('');
+    const [ lastName, setLastName] = useState('');
+    const [ emailAddress, setEmailAddress] = useState('');
+    const [ phoneNumber, setPhoneNumber] = useState('');
+    const [ workExperience, setWorkExperience] = useState('');
+    const [ state, setState] = useState('');
+    
     const userMenuOpen = Boolean(anchorEl);
+    const monthMap = ['January', 'Februaury', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
     const fetchData = () => {
         
@@ -35,9 +42,35 @@ const App = () => {
             setAllJobs(jobsListed)
             setFilteredJobs(jobsListed);
             setState("Jobs");
-            //console.log(jobsListed);
         })        
         
+    }
+
+
+    const sendApplication = () => {
+
+        const date = new Date()
+        var body = {
+            "applicant_name": firstName + " " + lastName,
+            "applicant_email": emailAddress,
+            "applicant_experience": workExperience,
+            "applicant_phone": phoneNumber,
+            "job_id": selectJob.id,
+            "applicant_id": "1",
+            "applicant_status": "Pending",
+            "date_applied": `${date.getDate()} ${monthMap[date.getMonth()]} ${date.getFullYear()}`
+        }
+
+        API.post(
+            "api/jobApplications",
+            body
+        ).then(() => {
+            // print success message notification
+            console.log("Successfully sent body: " + JSON.stringify(body))
+            // set state back to "Jobs"
+            setState("Jobs")
+        })
+
     }
     
     useEffect(() => {
@@ -62,7 +95,15 @@ const App = () => {
     };
 
     function setApplyState(){
-        setState("Apply")
+
+        if( state==="Jobs"){
+            setState("Apply")
+        }
+        else{
+            //Call the API to post the applicant details. 
+            sendApplication()
+        }
+       
     };
 
     const handleSearch = () => {
@@ -240,7 +281,8 @@ const App = () => {
                                          
                     <label>First Name</label>
 
-                    <TextField placeholder="Required" sx={{
+
+                    <TextField placeholder="Required" onChange={(e)=>setFirstName(e.target.value)} sx={{
                     'width': '100%',
                     'flexBasis': '100%',
                     'marginTop': '5px',
@@ -249,7 +291,7 @@ const App = () => {
                     }
                 }} />
                 <label>Last Name</label>
-                <TextField placeholder="Required" sx={{
+                <TextField placeholder="Required" onChange={(e)=>setLastName(e.target.value)} sx={{
                     'width': '100%',
                     'flexBasis': '100%',
                     'marginTop': '5px',
@@ -258,7 +300,8 @@ const App = () => {
                     }
                 }} />
                 <label>Email Address</label>                
-                <TextField placeholder="Required" sx={{
+
+                <TextField placeholder="Required" onChange={(e)=>setEmailAddress(e.target.value)} sx={{
                     'width': '100%',
                     'flexBasis': '30%',
                     'marginTop': '5px',
@@ -266,8 +309,8 @@ const App = () => {
                         "borderRadius": "50px"
                     }
                 }} />
-                <label>Phone</label>      
-                <TextField placeholder="Required" sx={{
+                <label>Phone</label>
+                <TextField placeholder="Required" onChange={(e)=>setPhoneNumber(e.target.value)} sx={{
                     'width': '100%',
                     'flexBasis': '30%',
                     'marginTop': '5px',
@@ -276,7 +319,8 @@ const App = () => {
                     }
                 }} />
                 <label>Previous Work Experience</label>      
-                <TextField placeholder="Required" sx={{
+
+                <TextField placeholder="Required" onChange={(e)=>setWorkExperience(e.target.value)} sx={{
                     'width': '100%',
                     'flexBasis': '30%',
                     'marginTop': '5px',
