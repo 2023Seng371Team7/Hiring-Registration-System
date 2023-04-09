@@ -1,28 +1,35 @@
 import * as React from "react";
 import { useEffect } from 'react';
+import { redirect, useNavigate } from "react-router-dom";
 import "./JobListings.css";
 import JobDescription from "./JobDescription";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import { Menu, MenuItem, Dialog, DialogContent, DialogContentText, DialogActions } from "@mui/material";
 import Job from "./Job";
 import API from "../api";
 import { useState } from "react";
+import myRoutes from "../routes";
 
 const App = () => {
+    const navigate = useNavigate();
     const [ selectJob, setSelectJob] = useState({}); 
     const [ allJobs, setAllJobs] = useState([]);
     const [ filteredJobs, setFilteredJobs] = useState([]);
     const [ jobTitleCompany, setTitleCompany] = useState('');
     const [ jobLocation, setJobLocation] = useState('');
+    const [ deleteAccountDialogOpen, setDeleteAccountDialogOpen] = useState(false);
+    const [ anchorEl, setAnchorEl] = useState(null);
+    const [ state, setState] = useState('');
     const [ firstName, setFirstName] = useState('');
     const [ lastName, setLastName] = useState('');
     const [ emailAddress, setEmailAddress] = useState('');
     const [ phoneNumber, setPhoneNumber] = useState('');
     const [ workExperience, setWorkExperience] = useState('');
     const [ state, setState] = useState('');
-
+    
+    const userMenuOpen = Boolean(anchorEl);
     const monthMap = ['January', 'Februaury', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-
 
     const fetchData = () => {
         
@@ -35,7 +42,6 @@ const App = () => {
             setAllJobs(jobsListed)
             setFilteredJobs(jobsListed);
             setState("Jobs");
-            //console.log(jobsListed);
         })        
         
     }
@@ -99,7 +105,7 @@ const App = () => {
         }
        
     };
-    
+
     const handleSearch = () => {
         let titleCompany = jobTitleCompany.toLowerCase()
         let location = jobLocation.toLowerCase()
@@ -117,8 +123,32 @@ const App = () => {
         else {
         setFilteredJobs(allJobs.filter(jobItem => (jobItem.title.toLowerCase().includes(titleCompany) || jobItem.company.toLowerCase().includes(titleCompany)) && jobItem.location.toLowerCase().includes(location)))            
         }
-      } 
+    };
     
+    const handleUserMenuClose = () => {
+        setAnchorEl(null);
+      };
+
+    const handleUserMenuClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+    
+    const handleUserMenuItemClick = () => {
+        // Open Dialog with Confirmation Message "Do you want to delete your Profile?"
+        setDeleteAccountDialogOpen(!deleteAccountDialogOpen);
+    };
+
+    const handleProfileDeletion = async () => {
+        // Send API request to delete
+        let result = await API.delete(
+            "api/managerupdate?username=" + localStorage.getItem("username"));
+        
+        if(result.status === 200){
+            // Then redirect to Login page.
+            setDeleteAccountDialogOpen(false);
+            navigate(myRoutes.LogIn);
+        }
+    };
 
     return (
         <div className="job-postings">
@@ -135,7 +165,65 @@ const App = () => {
                 </a>
                 <div className="flex-container-1">
                     <div className="cat-absolute-container">
-                        <span className="lgxwbhjlzydji">L</span>
+                        <span ><Button className="lgxwbhjlzydji" onClick={handleUserMenuClick}>L</Button></span>
+                        <Menu
+                        anchorEl={anchorEl}
+                        id="user-menu"
+                        open={userMenuOpen}
+                        onClose={handleUserMenuClose}
+                        onClick={handleUserMenuClose}
+                        PaperProps={{
+                            elevation: 0,
+                            sx: {
+                                overflow: 'visible',
+                                filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+                                mt: 1.5,
+                                '& .MuiAvatar-root': {
+                                    width: 32,
+                                    height: 32,
+                                    ml: -0.5,
+                                    mr: 1,
+                                },
+                                '&:before': {
+                                    content: '""',
+                                    display: 'block',
+                                    position: 'absolute',
+                                    top: 0,
+                                    right: 14,
+                                    width: 10,
+                                    height: 10,
+                                    bgcolor: 'background.paper',
+                                    transform: 'translateY(-50%) rotate(45deg)',
+                                    zIndex: 0,
+                                },
+                            },
+                        }}
+                        transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+                        anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+                        >
+                            <MenuItem
+                            onClick={handleUserMenuItemClick}
+                            sx={{
+                                bgcolor: 'error.main'
+                            }}>
+                            Delete My Profile
+                            </MenuItem>
+                        </Menu>
+                        <Dialog
+                            open={deleteAccountDialogOpen}
+                            onClose={handleUserMenuItemClick}
+                            aria-labelledby="alert-dialog-title"
+                            aria-describedby="alert-dialog-description">
+                        <DialogContent>
+                            <DialogContentText id="alert-dialog-description">
+                                Are you sure you want to permanently delete your account? 
+                            </DialogContentText>
+                        </DialogContent>
+                        <DialogActions>
+                            <Button onClick={handleProfileDeletion}>I Agree</Button>
+                            <Button onClick={handleUserMenuItemClick} autoFocus>Cancel</Button>
+                        </DialogActions>
+                    </Dialog>
                     </div>
                 </div>
             </div>
