@@ -26,7 +26,6 @@ const App = () => {
     const [ emailAddress, setEmailAddress] = useState('');
     const [ phoneNumber, setPhoneNumber] = useState('');
     const [ workExperience, setWorkExperience] = useState('');
-    const [ state, setState] = useState('');
     
     const userMenuOpen = Boolean(anchorEl);
     const monthMap = ['January', 'Februaury', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
