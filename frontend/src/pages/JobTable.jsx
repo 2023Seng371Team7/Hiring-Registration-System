@@ -42,7 +42,7 @@ export default function BasicTable(props) {
         <TableBody>
           {rows.map((row, i) => (
             <TableRow
-              key={row.title}
+              key={row.date}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell align="right">{row.date}</TableCell>

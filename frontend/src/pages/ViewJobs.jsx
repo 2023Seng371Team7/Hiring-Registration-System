@@ -122,7 +122,8 @@ const App = () => {
                         color: "#d7ecf5"
                       }
                 }} />
-                <Button className="button-instance" size="medium" {...propsData.button2} sx={{
+                <a href="/createJob">
+                <Button size="medium" {...propsData.button2} sx={{
                    'borderRadius': '50px',
                     'backgroundColor': '#397598',
                     'color': '#d7ecf5',
@@ -134,6 +135,7 @@ const App = () => {
                         color: "#d7ecf5"
                       }
                 }} />
+                </a>
             </div>
             <div className="flex-container">
                 <div>
