@@ -22,10 +22,12 @@ const App = () => {
     const handleSignUpClick = async (username, password) => {
         try {
             let result = await API.get(
-                "api/userSignUp?username=" + email + "&password=" + password
+                "api/userSignUp?username=" + username + "&password=" + password
             );
             if (result.status === 200){
-                localStorage.setItem('username', email);
+                var parsed_result = JSON.parse(result.data);
+                localStorage.setItem('user_id', parsed_result['user_id']);
+                localStorage.setItem('username', username);
                 navigate(myRoutes.JobsListed)
             }
         } catch (err) {

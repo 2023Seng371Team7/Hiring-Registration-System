@@ -28,7 +28,7 @@ def user_authenticate(request):
     salt_from_db = user_to_find['salt']
 
     if check_password(password, hash_from_db, salt_from_db):
-        return Response(json.dumps({key: user_to_find[key] for key in ["username", "role"]}), status=status.HTTP_200_OK)
+        return Response(json.dumps({key: user_to_find[key] for key in ["user_id", "username", "role"]}), status=status.HTTP_200_OK)
     return Response('Wrong username or password', status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
@@ -66,5 +66,5 @@ def user_signup(request):
     }
     result = collection.insert_one(newManagerDBItem)
     if result.acknowledged:
-        return Response(json.dumps({key: newManagerDBItem[key] for key in ["username", "role"]}), status=status.HTTP_200_OK)
+        return Response(json.dumps({key: newManagerDBItem[key] for key in ["user_id", "username", "role"]}), status=status.HTTP_200_OK)
     return Response('Insertion failed', status=status.HTTP_500_INTERNAL_SERVER_ERROR)

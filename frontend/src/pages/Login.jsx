@@ -25,7 +25,9 @@ const App = () => {
             if (result.status === 500)
                 alert("Incorrect password")
             else{
+                var parsed_result = JSON.parse(result.data);
                 localStorage.setItem('username', email);
+                localStorage.setItem('user_id', parsed_result['user_id']);
                 navigate(myRoutes.JobsListed)
             }
         } catch (err) {
