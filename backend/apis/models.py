@@ -3,12 +3,14 @@ from django.db import models
 
 # Create your models here.
 class User:
+    user_id: str
     role: str
     username: str
     salt: bytes
     hashed_password: bytes
 
-    def __init__(self, username, role, salt, hashed_password):
+    def __init__(self, user_id, username, role, salt, hashed_password):
+        self.user_id = user_id
         self.username = username
         self.role = role
         self.salt = salt

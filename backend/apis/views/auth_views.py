@@ -51,9 +51,14 @@ def user_signup(request):
     salt = generate_salt()
     hashed_password = encrypt(password, salt)
 
+    #Create id
+    total_users_in_db = collection.count_documents()
+    user_id = str(total_users_in_db + 1)
+
     # Add username & password to DB
-    newApplicant = models.User(username, "Applicant", salt, hashed_password)
+    newApplicant = models.User(user_id, username, "Applicant", salt, hashed_password)
     newManagerDBItem = {
+        "user_id": newApplicant.user_id,
         "username": newApplicant.username,
         "role": newApplicant.role,
         "salt": newApplicant.salt,

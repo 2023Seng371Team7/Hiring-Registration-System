@@ -16,10 +16,17 @@ class ManagerUpdate(APIView):
         # Get the new username and password from request
         username: str = request.GET['username']
         password: str = request.GET['password']
+        
+        db, _ = get_db_handle("HRS")
+        collection = db['credentials']
 
         # Generate salt
         salt = generate_salt()
         hashed_password = encrypt(password, salt)
+
+        # Create user id
+        total_users_in_db = collection.count_documents()
+        user_id = str(total_users_in_db + 1)
 
         # Add username & password to DB
         newManager = models.User(username, "HRManager", salt, hashed_password)
@@ -29,8 +36,6 @@ class ManagerUpdate(APIView):
             "salt": newManager.salt,
             "hash": newManager.hashed_password,
         }
-        db, _ = get_db_handle("HRS")
-        collection = db['credentials']
         result = collection.insert_one(newManagerDBItem)
         if result.acknowledged:
             return Response('', status=status.HTTP_200_OK)
