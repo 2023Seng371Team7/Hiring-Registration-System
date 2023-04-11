@@ -25,12 +25,13 @@ class ManagerUpdate(APIView):
         hashed_password = encrypt(password, salt)
 
         # Create user id
-        total_users_in_db = collection.count_documents()
+        total_users_in_db = collection.count_documents({})
         user_id = str(total_users_in_db + 1)
 
         # Add username & password to DB
-        newManager = models.User(username, "HRManager", salt, hashed_password)
+        newManager = models.User(user_id, username, "HRManager", salt, hashed_password)
         newManagerDBItem = {
+            "user_id": newManager.user_id,
             "username": newManager.username,
             "role": newManager.role,
             "salt": newManager.salt,
