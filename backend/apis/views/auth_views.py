@@ -1,13 +1,14 @@
+from apis import models
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import status
-from utils import get_db_handle, check_password
+from utils import get_db_handle, generate_salt, check_password, encrypt
 import json
 
 '''
 GET
 Pass username and password as GET parameters to authenticate a user. If successful,
-returns 200 with user model.
+returns 200 with username and role.
 '''
 
 
@@ -31,3 +32,34 @@ def user_authenticate(request):
     return Response('Wrong username or password', status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
+'''
+POST
+Pass username and password as GET parameters to register a new applicant user. If successful,
+returns 200 with username and role.
+'''
+
+
+@api_view(['POST'])
+def user_signup(request):
+    username = request.GET['username']
+    password = request.GET['password']
+
+    db, _ = get_db_handle("HRS")
+    collection = db['credentials']
+
+    # Generate salt
+    salt = generate_salt()
+    hashed_password = encrypt(password, salt)
+
+    # Add username & password to DB
+    newApplicant = models.User(username, "Applicant", salt, hashed_password)
+    newManagerDBItem = {
+        "username": newApplicant.username,
+        "role": newApplicant.role,
+        "salt": newApplicant.salt,
+        "hash": newApplicant.hashed_password,
+    }
+    result = collection.insert_one(newManagerDBItem)
+    if result.acknowledged:
+        return Response(json.dumps({key: newManagerDBItem[key] for key in ["username", "role"]}), status=status.HTTP_200_OK)
+    return Response('Insertion failed', status=status.HTTP_500_INTERNAL_SERVER_ERROR)

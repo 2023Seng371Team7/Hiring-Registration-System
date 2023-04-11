@@ -1,5 +1,5 @@
 from django.urls import include, path
-from apis.views.auth_views import user_authenticate
+from apis.views.auth_views import user_authenticate, user_signup
 from apis.views.manager_views import ManagerUpdate
 from apis.views.user_views import applications, relevantpostings
 from apis.views.job_views import Job
@@ -12,6 +12,7 @@ urlpatterns = [
     path("managerupdate", ManagerUpdate.as_view()),
     path("login", user_authenticate),
     path("hradmin", Admin.as_view()),
+    path("signup", user_signup),
     path("joblisting", JobListings.as_view()),
     path("job", Job.as_view()),
     path('jobApplications', JobApplication.as_view()),
