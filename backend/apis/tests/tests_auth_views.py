@@ -8,7 +8,7 @@ from utils import encrypt
 # Helper method
 def fake_user(password: str, salt: str) -> dict:
     fake_hash = encrypt(password, salt.encode())
-    return {"hash": fake_hash, "salt": salt.encode(), "username": 'test_username', "role": "manager"}
+    return {"hash": fake_hash, "salt": salt.encode(), "username": 'test_username', "role": "manager", "user_id": "1"}
 
 
 # Create your tests here.

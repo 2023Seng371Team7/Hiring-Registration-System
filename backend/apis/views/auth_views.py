@@ -57,14 +57,14 @@ def user_signup(request):
 
     # Add username & password to DB
     newApplicant = models.User(user_id, username, "Applicant", salt, hashed_password)
-    newManagerDBItem = {
+    newDBItem = {
         "user_id": newApplicant.user_id,
         "username": newApplicant.username,
         "role": newApplicant.role,
         "salt": newApplicant.salt,
         "hash": newApplicant.hashed_password,
     }
-    result = collection.insert_one(newManagerDBItem)
+    result = collection.insert_one(newDBItem)
     if result.acknowledged:
-        return Response(json.dumps({key: newManagerDBItem[key] for key in ["user_id", "username", "role"]}), status=status.HTTP_200_OK)
+        return Response(json.dumps({key: newDBItem[key] for key in ["user_id", "username", "role"]}), status=status.HTTP_200_OK)
     return Response('Insertion failed', status=status.HTTP_500_INTERNAL_SERVER_ERROR)
