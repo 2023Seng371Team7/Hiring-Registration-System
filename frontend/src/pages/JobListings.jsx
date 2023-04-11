@@ -55,7 +55,7 @@ const App = () => {
             "applicant_experience": workExperience,
             "applicant_phone": phoneNumber,
             "job_id": selectJob.id,
-            "applicant_id": "1",
+            "applicant_id": localStorage.getItem('user_id'),
             "applicant_status": "Pending",
             "date_applied": `${date.getDate()} ${monthMap[date.getMonth()]} ${date.getFullYear()}`
         }
