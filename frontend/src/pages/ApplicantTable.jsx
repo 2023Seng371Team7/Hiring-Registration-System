@@ -8,24 +8,34 @@ import TableRow from '@mui/material/TableRow';
 import Button from '@mui/material/Button';
 import Paper from '@mui/material/Paper';
 import Select from '@mui/material/Select';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import { MenuItem } from '@mui/material';
 
 function createData(date, name, email, education) {
   return { date, name, email, education};
 }
 
-const rows = [
-  createData('12-Jan-2023', 'Nicholas C', 'nic@email.com', 'Bachelor'),
-  createData('13-Jan-2023', 'Sam K', 'sam@email.com', 'Bachelor'),
-  createData('11-Feb-2023', 'Peter L', 'pete@email.com', 'Masters'),
-  createData('12-Feb-2023', 'Bruce Doe', 'doe@email.com', 'Bachelor'),
-  createData('01-Mar-2023', 'Sam L', 'l.sam@email.com', 'Bachelor'),
-];
 
 export default function BasicTable(props) {
-  const [menuOpen, setMenuOpen] = useState(rows.map(row => 0));
+  const [rows, setRows] = useState([
+    createData('12-Jan-2023', 'Nicholas C', 'nic@email.com', 'Bachelor'),
+    createData('13-Jan-2023', 'Sam K', 'sam@email.com', 'Bachelor'),
+    createData('11-Feb-2023', 'Peter L', 'pete@email.com', 'Masters'),
+    createData('12-Feb-2023', 'Bruce Doe', 'doe@email.com', 'Bachelor'),
+    createData('01-Mar-2023', 'Sam L', 'l.sam@email.com', 'Bachelor'),
+  ])
+  const [menuOpen, setMenuOpen] = useState([0,0,0,0,0]);
 
+  useEffect(() => {
+    const storedMenuOpen = localStorage.getItem('menuOpen');
+    if (storedMenuOpen) {
+      setMenuOpen(JSON.parse(storedMenuOpen));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('menuOpen', JSON.stringify(menuOpen));
+  }, [menuOpen])
 
   return (<>
     <TableContainer component={Paper}>
