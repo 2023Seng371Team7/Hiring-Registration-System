@@ -17,15 +17,15 @@ from django.contrib import admin
 from django.urls import include, path
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
+    #path("admin/", admin.site.urls),
     path("logIn", include("frontend.urls")),
     path("signUp", include("frontend.urls")),
-    path("addJob", include("frontend.urls")),
-    path("applyJob", include("frontend.urls")),
     path("myApplications", include("frontend.urls")),
     path("jobsListed", include("frontend.urls")),
     path("applicants/<int:id>", include("frontend.urls")),
     path("hradmin", include("frontend.urls")),
+    path("jobs", include("frontend.urls")),
+    path("createJob", include("frontend.urls")),
     path("", include("frontend.urls")),
     path("api/", include("apis.urls"))
 ]
