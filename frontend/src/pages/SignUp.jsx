@@ -3,9 +3,13 @@ import "./Login.css";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import {Link} from "react-router-dom";
-
+import {useState} from "react";
+import API from "../api";
+import myRoutes from "../routes";
+import { useNavigate } from "react-router-dom";
 
 const App = () => {
+    const navigate = useNavigate();
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const propsData = {
@@ -19,10 +23,10 @@ const App = () => {
         },
     };
 
-    const handleSignUpClick = async (username, password) => {
+    const handleSignUpClick = async () => {
         try {
-            let result = await API.get(
-                "api/userSignUp?username=" + username + "&password=" + password
+            let result = await API.post(
+                "api/signup?username=" + username + "&password=" + password
             );
             if (result.status === 200){
                 var parsed_result = JSON.parse(result.data);
@@ -59,7 +63,7 @@ const App = () => {
                 <TextField
                     className="group-15-instance"
                     {...propsData.rectangle10}
-                    type="text"
+                    type="password"
                     placeholder="Password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
