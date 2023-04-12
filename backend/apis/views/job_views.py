@@ -22,7 +22,7 @@ class Job(APIView):
         if job is None:
             return Response(status=status.HTTP_404_NOT_FOUND)
         return Response(json.dumps({key: job[0][key] for key in [
-            "id", "title", "description", "location", "salary", "company", "date_posted", "url"]}), status=status.HTTP_200_OK)
+            "id", "title", "description", "location", "salary", "company", "date_posted", "url", "start_date", "job_type"]}), status=status.HTTP_200_OK)
 
     # POST
     # Create method to create job using a job model array through POST API request  based on model JobListings.

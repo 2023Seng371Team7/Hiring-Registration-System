@@ -33,7 +33,7 @@
     flex-basis: 90%;
     justify-content: space-between;
     align-self: center;
-    align-items:center;
+    align-items: center;
     margin-top: 6px;
     font-size: 1.5rem;
     font-weight: 600;
@@ -83,13 +83,27 @@
     font-weight: 600;
 }
 
-.salary {
+.job-id-heading {
+    margin-top: 2px;
+    margin-left: 7px;
+    font-weight: 600;
+}
+
+.date-posted {
     margin-bottom: 23px;
+}
+
+.job-start-date-heading {
+    margin-top: 2px;
+    margin-left: 7px;
+    font-weight: 600;
+}
+
+.salary {
     margin-left: 7px;
 }
 
 .job-type-heading {
-    margin-top: 3px;
     margin-left: 7px;
     font-weight: 600;
 }

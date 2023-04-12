@@ -39,10 +39,21 @@ const App = () => {
             </div>
 
             <div className="createJob">
-                <label style={{marginLeft:'17px'}}>Create Job Posting</label>
+                <label style={{ marginLeft: '17px' }}>Create Job Posting</label>
                 <div className="post-body">
 
                     <div className="left-col">
+                        <label>Job ID</label>
+
+
+                        <TextField placeholder="Required" onChange={(e) => setFirstName(e.target.value)} sx={{
+                            'width': '100%',
+                            'flexBasis': '100%',
+                            'marginTop': '5px',
+                            "& .MuiInputBase-root": {
+                                "borderRadius": "50px",
+                            }
+                        }} />
                         <label>Title</label>
 
 
@@ -94,7 +105,18 @@ const App = () => {
                                 "borderRadius": "50px"
                             }
                         }} />
+
                         <label>Job Description</label>
+                        <TextField placeholder="Required" onChange={(e) => setWorkExperience(e.target.value)} sx={{
+                            'width': '100%',
+                            'flexBasis': '30%',
+                            'marginTop': '5px',
+                            "& .MuiInputBase-root": {
+                                "borderRadius": "50px"
+                            }
+                        }} />
+
+                        <label>Job Start Date</label>
                         <TextField placeholder="Required" onChange={(e) => setWorkExperience(e.target.value)} sx={{
                             'width': '100%',
                             'flexBasis': '30%',
@@ -106,17 +128,17 @@ const App = () => {
                     </div>
                 </div>
                 <Button size="medium" {...propsData.button} sx={{
-                   'borderRadius': '50px',
+                    'borderRadius': '50px',
                     'backgroundColor': '#397598',
                     'color': '#d7ecf5',
                     'borderColor': '#397598',
                     'marginTop': '0.5rem',
                     'marginLeft': '17px',
-                    'alignSelf':'start',
+                    'alignSelf': 'start',
                     ":hover": {
                         bgcolor: "#578DAD",
                         color: "#d7ecf5"
-                      }
+                    }
                 }} />
             </div>
 

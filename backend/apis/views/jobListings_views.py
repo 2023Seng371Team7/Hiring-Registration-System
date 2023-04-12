@@ -22,5 +22,5 @@ class JobListings(APIView):
         job_list = []
         for job in jobs:
             job_list.append(json.dumps({key: job[key] for key in [
-                            "id", "title", "description", "location", "salary", "company", "date_posted", "url"]}))
+                            "id", "title", "description", "location", "salary", "start_date", "company", "date_posted", "url", "job_type"]}))
         return Response(job_list, status=status.HTTP_200_OK)
