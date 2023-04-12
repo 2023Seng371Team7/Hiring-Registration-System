@@ -26,10 +26,10 @@ const App = () => {
                 var parsed_result = JSON.parse(result.data);
                 localStorage.setItem('username', email);
                 localStorage.setItem('user_id', parsed_result['user_id']);
-                if (result.data.roll === "Admin") {
+                if (parsed_result.role === "Admin") {
                     navigate("/applicants/1");
                 } 
-                else if(result.data.roll == "Manager"){
+                else if(parsed_result.role == "Manager"){
                     navigate(myRoutes.Admin);
                 }
                 else {
