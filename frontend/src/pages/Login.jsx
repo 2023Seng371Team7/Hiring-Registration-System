@@ -19,14 +19,22 @@ const App = () => {
     }
     const logIn = async (email, password) => {
         try {
-            let result = await API.get(
-                "api/login?username=" + email + "&password=" + password
-            );
-            if (result.status === 500)
-                alert("Incorrect password")
-            else{
+            let result = await API.get("api/login?username=" + email + "&password=" + password);
+            if (result.status === 500) {
+                alert("Incorrect password");
+            } else {
+                var parsed_result = JSON.parse(result.data);
                 localStorage.setItem('username', email);
-                navigate(myRoutes.JobsListed)
+                localStorage.setItem('user_id', parsed_result['user_id']);
+                if (parsed_result.role === "Admin") {
+                    navigate("/applicants/1");
+                } 
+                else if(parsed_result.role == "Manager"){
+                    navigate(myRoutes.Admin);
+                }
+                else {
+                    navigate(myRoutes.JobsListed);
+                }
             }
         } catch (err) {
             console.error(err);

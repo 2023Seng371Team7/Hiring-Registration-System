@@ -6,6 +6,8 @@ import {Link} from "react-router-dom";
 
 
 const App = () => {
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
     const propsData = {
         group15: {
             fullWidth: true,
@@ -16,6 +18,23 @@ const App = () => {
             label: "Password",
         },
     };
+
+    const handleSignUpClick = async (username, password) => {
+        try {
+            let result = await API.get(
+                "api/userSignUp?username=" + username + "&password=" + password
+            );
+            if (result.status === 200){
+                var parsed_result = JSON.parse(result.data);
+                localStorage.setItem('user_id', parsed_result['user_id']);
+                localStorage.setItem('username', username);
+                navigate(myRoutes.JobsListed)
+            }
+        } catch (err) {
+            console.error(err);
+        }
+    };
+
     return (
         <div className="sign-in">
             <div className="rectangle-3">
@@ -24,6 +43,8 @@ const App = () => {
                     className="group-15-instance"
                     {...propsData.group15}
                     placeholder="Username"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
                     type="text"
                     sx={{
                         "width": "55%",
@@ -40,6 +61,8 @@ const App = () => {
                     {...propsData.rectangle10}
                     type="text"
                     placeholder="Password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                     sx={{
                         'width': '55%',
                         'margin': '0px 0px 0.7rem',
@@ -51,7 +74,13 @@ const App = () => {
                     }}
                 />
                 <span className="forgot-password">Forgot Password?</span>
-                <Button variant="contained" className="button" id="sigin-button" size="medium" sx={{
+                <Button 
+                variant="contained" 
+                className="button" 
+                id="sigin-button" 
+                size="medium" 
+                onClick={handleSignUpClick}
+                sx={{
                     'borderRadius': '50px',
                     'backgroundColor': '#397598',
                     'color': '#d7ecf5',

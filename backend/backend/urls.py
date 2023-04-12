@@ -25,6 +25,7 @@ urlpatterns = [
     path("myApplications", include("frontend.urls")),
     path("jobsListed", include("frontend.urls")),
     path("applicants/<int:id>", include("frontend.urls")),
+    path("hradmin", include("frontend.urls")),
     path("", include("frontend.urls")),
     path("api/", include("apis.urls"))
 ]
